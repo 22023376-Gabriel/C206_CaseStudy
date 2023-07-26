@@ -4,7 +4,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		int option = 0;
 		
-		while (option != 2) {
+		while (option != 2) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
