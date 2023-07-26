@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
 	public static void main(String[] args) {
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		
 		int option = 0;
 		
 		while (option != 2) { //Modify the quit number whenever you want
