@@ -4,6 +4,7 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
+		ArrayList<User> userList = new ArrayList<User>();
 		
 		int option = 0;
 		
