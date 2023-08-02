@@ -6,13 +6,15 @@ public class C206_CaseStudy {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Course> courseList = new ArrayList<Course>();
+        ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+
 		
 		studentList.add(new Student(1, "Jack Park"));
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
 		
 		int option = 0;
 		
-		while (option != 4) { //Modify the quit number whenever you want
+		while (option != 7) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -26,6 +28,13 @@ public class C206_CaseStudy {
 			else if (option == 3) {
 				viewAllCourses(courseList);
 			}
+			else if (option == 4) {
+	                addNewEnrolment(enrolmentList, studentList, courseList);
+	        } else if (option == 5) {
+	                viewAllEnrolments(enrolmentList);
+	        } else if (option == 6) {
+	                deleteEnrolment(enrolmentList);
+	            }
 		}
 		
 	}
@@ -56,4 +65,69 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
-}
+	
+	 public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
+	            ArrayList<Course> courseList) {
+	        int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
+	        int studentId = Helper.readInt("Enter Student ID: ");
+	        int courseId = Helper.readInt("Enter Course ID: ");
+	        String enrolmentDate = Helper.readString("Enter Enrolment Date (dd/mm/yyyy): ");
+
+	        // Check if the student and course exist
+	        boolean studentExists = false;
+	        boolean courseExists = false;
+
+	        for (Student student : studentList) {
+	            if (student.getStudentID() == studentId) {
+	                studentExists = true;
+	                break;
+	            }
+	        }
+
+	        for (Course course : courseList) {
+	            if (course.getCourseID() == courseId) {
+	                courseExists = true;
+	                break;
+	            }
+	        }
+
+	        if (studentExists && courseExists) {
+	            Enrolment enrolment = new Enrolment(enrolmentId, courseId, studentId, enrolmentDate);
+	            enrolmentList.add(enrolment);
+	            System.out.println("Enrolment added successfully.");
+	        } else {
+	            System.out.println("Error: Student ID or Course ID not found.");
+	        }
+	    }
+
+	    // View all enrolments
+	    public static void viewAllEnrolments(ArrayList<Enrolment> enrolmentList) {
+	        String output = "";
+	        output += String.format("%-10s %-10s %-10s %-15s\n", "Enrolment ID", "Course ID", "Student ID", "Enrolment Date");
+	        for (Enrolment enrolment : enrolmentList) {
+	            output += String.format("%-12d %-10d %-10d %-15s\n", enrolment.getEnrolmentId(), enrolment.getCourseId(),
+	                    enrolment.getStudentId(), enrolment.getEnrolmentDate());
+	        }
+	        System.out.println(output);
+	    }
+
+	    // Delete an existing enrolment
+	    public static void deleteEnrolment(ArrayList<Enrolment> enrolmentList) {
+	        int enrolmentId = Helper.readInt("Enter Enrolment ID to delete: ");
+	        boolean found = false;
+
+	        for (int i = 0; i < enrolmentList.size(); i++) {
+	            if (enrolmentList.get(i).getEnrolmentId() == enrolmentId) {
+	                enrolmentList.remove(i);
+	                found = true;
+	                System.out.println("Enrolment with ID " + enrolmentId + " has been deleted.");
+	                break;
+	            }
+	        }
+
+	        if (!found) {
+	            System.out.println("Error: Enrolment ID not found.");
+	        }
+	    }
+	}
+
