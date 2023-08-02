@@ -2,25 +2,35 @@
 public class User {
 	private String name;
 	private String password;
+	private String userRole;
 	private String email;
 	private String mobileNumber;
 	private String homeNumber;
 	
-	public User(String name, String password, String email, String mobileNumber) {
-		super();
+	public User(String name, String password,String userRole, String email, String mobileNumber) {
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
+		this.userRole = userRole;
+		homeNumber = "";
 	}
 
-	public User(String name, String password, String email, String mobileNumber, String homeNumber) {
-		super();
+	public User(String name, String password,String userRole, String email, String mobileNumber, String homeNumber) {
+		this.userRole = userRole;
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
 		this.homeNumber = homeNumber;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	public String getName() {
