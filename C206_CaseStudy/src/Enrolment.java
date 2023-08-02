@@ -51,4 +51,5 @@ public class Enrolment {
 
     public static void deleteEnrolment(int enrolmentId) {
         enrolments.removeIf(e -> e.getEnrolmentId() == enrolmentId);
-    }}
+    }
+}
