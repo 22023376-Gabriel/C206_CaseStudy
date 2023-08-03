@@ -128,10 +128,6 @@ public class C206_CaseStudy {
 				courseList.remove(removeCourseID);
 				System.out.println("Course " + removeCourseID + " has been removed.");
 				
-			} else if (comfirmation == 'n' || comfirmation == 'N') {
-				System.out.println("Option 'No' has been selected.");
-			} else {
-				System.out.println("Option doesn't exist.");
 			}
 			
 		} else {
