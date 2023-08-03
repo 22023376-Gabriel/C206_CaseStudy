@@ -13,9 +13,7 @@ public class C206_CaseStudy {
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
-        //test - rmb to remove
-        courseList.add(new Course(1, "C209", 23.45));
-        courseList.add(new Course(1, "C356", 45.90));
+
         
 		int option = 0;
 		int courseOption = 0;
