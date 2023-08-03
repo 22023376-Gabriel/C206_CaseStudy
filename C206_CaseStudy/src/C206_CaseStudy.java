@@ -13,8 +13,12 @@ public class C206_CaseStudy {
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
+        //test - rmb to remove
+        courseList.add(new Course(1, "C209", 23.45));
+        courseList.add(new Course(1, "C356", 45.90));
         
 		int option = 0;
+		int courseOption = 0;
 		
 		while (option != 7) { //Modify the quit number whenever you want
 			menu();
@@ -40,7 +44,32 @@ public class C206_CaseStudy {
 				
 			}
 			else if (option == 3) {
-				viewAllCourses(courseList);
+				while (courseOption != 5) {
+					Helper.line(80, "-");
+					System.out.println("COURSE MANAGEMENT");
+					Helper.line(80, "-");
+					System.out.println("1. Display All Course");
+					System.out.println("2. Add New Course");
+					System.out.println("3. Edit Course");
+					System.out.println("4. Remove Course");
+					System.out.println("5. Quit");
+					Helper.line(80, "-");
+					
+					courseOption = Helper.readInt("Enter an option > ");
+					
+					if (courseOption == 1) {
+						viewAllCourses(courseList);
+					}
+					else if (courseOption == 2) {
+						addNewCourse(courseList);
+					}
+					else if (courseOption == 3) {
+						updateCourse(courseList);
+					}
+					else if (courseOption == 4) {
+						deleteCourse(courseList);
+					}
+				}
 			}
 			else if (option == 4) {
 	                addNewEnrolment(enrolmentList, studentList, courseList);
@@ -48,7 +77,7 @@ public class C206_CaseStudy {
 	                viewAllEnrolments(enrolmentList);
 	        } else if (option == 6) {
 	                deleteEnrolment(enrolmentList);
-	            }
+	        }
 		}
 		
 	}
@@ -58,8 +87,11 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");		
 		System.out.println("1. User Management");
 		System.out.println("2. Display All Students");
-		System.out.println("3. Display All Course");
-		System.out.println("4. Quit");
+		System.out.println("3. Course Management");
+		System.out.println("4. Add New Enrollment");
+		System.out.println("5. Display All Enrolments");
+		System.out.println("6. Remove Enrolment");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -74,9 +106,9 @@ public class C206_CaseStudy {
 	
 	public static void viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
-		output += String.format("%-5s %-15s %-10s", "ID", "Name", "Course Fee");
+		output += String.format("%-5s %-10s %-10s", "ID", "Name", "Course Fee");
 		for (int i = 0; i < courseList.size(); i++) {
-			output += String.format("%-5d %-15s %-10.2f\n", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
+			output += String.format("\n%-5d %-10s $%-10.2f", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
 		}
 		System.out.println(output);
 	}
@@ -86,16 +118,16 @@ public class C206_CaseStudy {
 		String courseName = Helper.readString("Enter Course Name > ");
 		double courseFee = Helper.readDouble("Enter Course Fees > ");
 		
-		boolean courseAvaliable = false;
+		boolean courseAvaliableId = false;
 		
 		for (Course course : courseList) {
             if (course.getCourseID() != courseID) {
-            	courseAvaliable = true;
+            	courseAvaliableId = true;
                 break;
             }
         }
 
-        if (courseAvaliable) {
+        if (courseAvaliableId) {
             Course course = new Course(courseID, courseName, courseFee);
             courseList.add(course);
             System.out.println("Course added successfully.");
@@ -105,33 +137,70 @@ public class C206_CaseStudy {
 	}
 	
 	public static void deleteCourse(ArrayList<Course> courseList) {
-		int removeCourseID = Helper.readInt("Enter Course to be removed > ");
+		String removeCourse = Helper.readString("Enter Course to be removed > ");
 		boolean courseExist = false;
 		
 		for (int i = 0; i < courseList.size(); i++) {
-			if (removeCourseID == courseList.get(i).getCourseID()) {
+			if (courseList.get(i).getCourseName().equalsIgnoreCase(removeCourse)) {
 				courseExist = true;
+				
+				if (courseExist) {
+					char comfirmation = Helper.readChar("Are you sure? (y|n) > ");
+					
+					if (comfirmation == 'y' || comfirmation == 'Y') {
+						System.out.println("Course " + courseList.get(i).getCourseName() + " has been removed.");
+						courseList.remove(i);
+					}
+				}
+			} 
+		}
+	}
+	
+	public static void updateCourse(ArrayList<Course> courseList) {
+		System.out.println("1. Update Name");
+		System.out.println("2. Update Fees");
+		System.out.println("3. Update Name & Fees");
+		System.out.println("4. Quit");
+		int updateOption = Helper.readInt("Enter option > ");
+		
+		if (updateOption == 1) {
+			String nameToUpdate = Helper.readString("Enter Course Name > ");
+			
+			for (int i = 0; i < courseList.size(); i++) {
+				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
+					String newName = Helper.readString("Enter New Course Name > ");
+					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+					courseList.get(i).setCourseName(newName);
+				}
 			}
 		}
-		
-		if (courseExist) {
-			String output = "";
-			output += String.format("%-5s %-15s %-10s", "ID", "Name", "Course Fee");
-			for (int e = 0; e < courseList.size(); e++) {
-				output += String.format("%-5d %-15s %-10.2f\n", courseList.get(e).getCourseID(), courseList.get(e).getCourseName(), courseList.get(e).getCourseFee());
+		else if (updateOption == 2) {
+			String nameToUpdate = Helper.readString("Enter Course Name > ");
+			
+			for (int i = 0; i < courseList.size(); i++) {
+				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
+					double newFee = Helper.readDouble("Enter New Fee Amount > ");
+					System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
+					courseList.get(i).setCourseFee(newFee);
+				}
 			}
-			System.out.println(output);
+		}
+		else if (updateOption == 3) {
+			String nameToUpdate = Helper.readString("Enter Course Name > ");
 			
-			char comfirmation = Helper.readChar("Are you sure? (y|n) > ");
+			for (int i = 0; i < courseList.size(); i++) {
+				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
+					String newName = Helper.readString("Enter New Course Name > ");
+					double newFee = Helper.readDouble("Enter New Fee Amount > ");
+
+					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+					System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
 			
-			if (comfirmation == 'y' || comfirmation == 'Y') {
-				courseList.remove(removeCourseID);
-				System.out.println("Course " + removeCourseID + " has been removed.");
-				
+					courseList.get(i).setCourseName(newName);
+					courseList.get(i).setCourseFee(newFee);
+
+				}
 			}
-			
-		} else {
-			System.out.println("Course doesn't exist.");
 		}
 	}
 	
