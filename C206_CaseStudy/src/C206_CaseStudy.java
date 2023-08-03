@@ -16,7 +16,6 @@ public class C206_CaseStudy {
 
         
 		int option = 0;
-		int courseOption = 0;
 		
 		while (option != 7) { //Modify the quit number whenever you want
 			menu();
@@ -42,17 +41,9 @@ public class C206_CaseStudy {
 				
 			}
 			else if (option == 3) {
+				int courseOption = 0;
 				while (courseOption != 5) {
-					Helper.line(80, "-");
-					System.out.println("COURSE MANAGEMENT");
-					Helper.line(80, "-");
-					System.out.println("1. Display All Course");
-					System.out.println("2. Add New Course");
-					System.out.println("3. Edit Course");
-					System.out.println("4. Remove Course");
-					System.out.println("5. Quit");
-					Helper.line(80, "-");
-					
+					courseMenu();
 					courseOption = Helper.readInt("Enter an option > ");
 					
 					if (courseOption == 1) {
@@ -93,6 +84,19 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 
 	}
+	
+	public static void courseMenu() { 
+		Helper.line(80, "-");
+		System.out.println("COURSE MANAGEMENT");
+		Helper.line(80, "-");
+		System.out.println("1. Display All Course");
+		System.out.println("2. Add New Course");
+		System.out.println("3. Edit Course");
+		System.out.println("4. Remove Course");
+		System.out.println("5. Quit");
+		Helper.line(80, "-");
+	}
+	
 	public static void viewAllStudents(ArrayList<Student> studentList) {
 		String output = "";
 		output += String.format("%-5s %-15s %-15s %-10s" , "ID", "Name", "Amount Fee", "Due Date");
