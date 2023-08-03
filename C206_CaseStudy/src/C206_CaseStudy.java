@@ -71,6 +71,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	
 	public static void viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
 		output += String.format("%-5s %-15s %-10s", "ID", "Name", "Course Fee");
@@ -78,6 +79,64 @@ public class C206_CaseStudy {
 			output += String.format("%-5d %-15s %-10.2f\n", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
 		}
 		System.out.println(output);
+	}
+	
+	public static void addNewCourse(ArrayList<Course> courseList) {
+		int courseID = Helper.readInt("Enter Course ID > ");
+		String courseName = Helper.readString("Enter Course Name > ");
+		double courseFee = Helper.readDouble("Enter Course Fees > ");
+		
+		boolean courseAvaliable = false;
+		
+		for (Course course : courseList) {
+            if (course.getCourseID() != courseID) {
+            	courseAvaliable = true;
+                break;
+            }
+        }
+
+        if (courseAvaliable) {
+            Course course = new Course(courseID, courseName, courseFee);
+            courseList.add(course);
+            System.out.println("Course added successfully.");
+        } else {
+            System.out.println("Error: Course ID is not available.");
+        }
+	}
+	
+	public static void deleteCourse(ArrayList<Course> courseList) {
+		int removeCourseID = Helper.readInt("Enter Course to be removed > ");
+		boolean courseExist = false;
+		
+		for (int i = 0; i < courseList.size(); i++) {
+			if (removeCourseID == courseList.get(i).getCourseID()) {
+				courseExist = true;
+			}
+		}
+		
+		if (courseExist) {
+			String output = "";
+			output += String.format("%-5s %-15s %-10s", "ID", "Name", "Course Fee");
+			for (int e = 0; e < courseList.size(); e++) {
+				output += String.format("%-5d %-15s %-10.2f\n", courseList.get(e).getCourseID(), courseList.get(e).getCourseName(), courseList.get(e).getCourseFee());
+			}
+			System.out.println(output);
+			
+			char comfirmation = Helper.readChar("Are you sure? (y|n) > ");
+			
+			if (comfirmation == 'y' || comfirmation == 'Y') {
+				courseList.remove(removeCourseID);
+				System.out.println("Course " + removeCourseID + " has been removed.");
+				
+			} else if (comfirmation == 'n' || comfirmation == 'N') {
+				System.out.println("Option 'No' has been selected.");
+			} else {
+				System.out.println("Option doesn't exist.");
+			}
+			
+		} else {
+			System.out.println("Course doesn't exist.");
+		}
 	}
 	
 	 public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
