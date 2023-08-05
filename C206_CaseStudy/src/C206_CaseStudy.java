@@ -17,7 +17,7 @@ public class C206_CaseStudy {
         
 		int option = 0;
 		
-		while (option != 7) { //Modify the quit number whenever you want
+		while (option != 9) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -66,6 +66,10 @@ public class C206_CaseStudy {
 	                viewAllEnrolments(enrolmentList);
 	        } else if (option == 6) {
 	                deleteEnrolment(enrolmentList);
+	        }else if(option == 7) {
+	        		addNewStudent(studentList);
+	        }else if (option == 8) {
+	        		removeStudent(studentList);
 	        }
 		}
 		
@@ -80,7 +84,9 @@ public class C206_CaseStudy {
 		System.out.println("4. Add New Enrollment");
 		System.out.println("5. Display All Enrolments");
 		System.out.println("6. Remove Enrolment");
-		System.out.println("7. Quit");
+		System.out.println("7. Add New Student");
+		System.out.println("8. Remove Student");
+		System.out.println("9. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -274,5 +280,38 @@ public class C206_CaseStudy {
 	        for (User u : userList) {
 	            System.out.println(String.format("%-20s %-20s %-30s %-10s %-10s", u.getName(), u.getUserRole(), u.getEmail(), u.getMobileNumber(), u.getHomeNumber()));
 	        }
+	    }
+	    public static void addNewStudent(ArrayList<Student> studentList) {
+	    	int id = Helper.readInt("Enter Student ID: ");
+	    	String name = Helper.readString("Enter Student Name: ");
+	    	boolean duplicate = false;
+	    	for (int i=0; i<studentList.size(); i++) {
+	    		if (studentList.get(i).getStudentID() == id) {
+	    			duplicate = true;
+	    			
+	    		}
+	    		} if (duplicate == true) {
+	    			System.out.println("Error: Duplicate Student ID");
+	    		}else {
+	    			Student student = new Student(id,name);
+	    			studentList.add(student);
+	    			System.out.println("Student successfully added!");
+	    		
+	    	}
+	    }
+	    public static void removeStudent(ArrayList<Student> studentList) {
+	    	int id = Helper.readInt("Enter Student ID: ");
+	    	boolean found = false;
+	    	for (int i = 0; i<studentList.size();i++) {
+	    		if (studentList.get(i).getStudentID() == id) {
+	    			found = true;
+	    			studentList.remove(i);
+	    		}
+	    	}
+	    	if (found ==false) {
+	    		System.out.println("Error: Student ID not found.");
+	    	}else {
+	    		System.out.println("Student successfully removed.");
+	    	}
 	    }
 	}
