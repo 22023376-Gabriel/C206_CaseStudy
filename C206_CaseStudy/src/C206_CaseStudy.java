@@ -32,7 +32,8 @@ public class C206_CaseStudy {
 
                     userOption = Helper.readInt("Enter an option > ");
                     if (userOption == 1) {
-                        viewAllUsers(userList);
+                       String output = viewAllUsers(userList);
+                        System.out.println(output);
                     }
                 }
             }
@@ -275,11 +276,13 @@ public class C206_CaseStudy {
 	            System.out.println("Error: Enrolment ID not found.");
 	        }
 	    }
-	    public static void viewAllUsers(ArrayList<User> userList) {
+	    public static String viewAllUsers(ArrayList<User> userList) {
 	        System.out.println(String.format("\n%-20s %-20s %-30s %-10s %-10s", "User Name", "Role", "Email", "Mobile No.", "Home No."));
+	        String output = "";
 	        for (User u : userList) {
-	            System.out.println(String.format("%-20s %-20s %-30s %-10s %-10s", u.getName(), u.getUserRole(), u.getEmail(), u.getMobileNumber(), u.getHomeNumber()));
+	            output += String.format("%-20s %-20s %-30s %-10s %-10s\n", u.getName(), u.getUserRole(), u.getEmail(), u.getMobileNumber(), u.getHomeNumber());
 	        }
+	        return output;
 	    }
 	    public static void addNewStudent(ArrayList<Student> studentList) {
 	    	int id = Helper.readInt("Enter Student ID: ");
