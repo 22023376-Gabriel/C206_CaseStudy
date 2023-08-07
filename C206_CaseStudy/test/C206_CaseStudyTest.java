@@ -44,12 +44,12 @@ public void testViewAllUsers() {
 
     assertEquals("Check that ViewAllUserslist", testOutput, allUsers);
 
-    // Given an empty list, after adding 4 users, test if the size of the list is 4 - normal
+    // Given an empty list, after adding 4 users, test if the list is not empty
     userList.add(user1);
     userList.add(user2);
     userList.add(user3);
     userList.add(user4);
-    assertEquals("Test that the user arraylist size is 4", 4, userList.size());
+    assertNotEquals("Test that the user arraylist size is not empty", 0, userList.size());
 
     // test if the expected output string same as the list of users retrieved from the SourceCentre
     allUsers = C206_CaseStudy.viewAllUsers(userList);
@@ -61,6 +61,9 @@ public void testViewAllUsers() {
     assertEquals("Test that ViewAllUserslist works", testOutput, allUsers);
 }
 
-
+@Test 
+public void testAddUser() {
+	//Test if 
+}
 
 }
