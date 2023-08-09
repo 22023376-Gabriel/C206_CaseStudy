@@ -122,13 +122,14 @@ public class C206_CaseStudy {
 	    Helper.line(80, "-");
 	}
 	
-	public static void viewAllStudents(ArrayList<Student> studentList) {
+	public static String viewAllStudents(ArrayList<Student> studentList) {
+		
+		System.out.println(String.format("%-5s %-15s %-15s %-10s" , "ID", "Name", "Amount Fee", "Due Date"));
 		String output = "";
-		output += String.format("%-5s %-15s %-15s %-10s" , "ID", "Name", "Amount Fee", "Due Date");
 		for (int i = 0; i< studentList.size(); i++) {
-			output += String.format("\n%-5d %-15s %-15.2f %-10s", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getAmountfee(), studentList.get(i).getDueDate());
+			output += String.format("%-5d %-15s %-15.2f %-10s\n", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getAmountfee(), studentList.get(i).getDueDate());
 		}
-		System.out.println(output);
+		return output;
 	}
 	
 	public static void viewAllCourses(ArrayList<Course> courseList) {
