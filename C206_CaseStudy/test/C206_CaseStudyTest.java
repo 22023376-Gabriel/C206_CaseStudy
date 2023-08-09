@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class C206_CaseStudyTest {
 
     ArrayList<User> userList = new ArrayList<User>();
+    
 	private Admin user1;
 	private Admin user2;
 	private Teacher user3;
@@ -64,6 +65,26 @@ public void testViewAllUsers() {
 @Test 
 public void testAddUser() {
 	//Test if 
+}
+@Test
+public void testAddNewEnrolment() {
+    ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+    ArrayList<Student> studentList = new ArrayList<Student>();
+    ArrayList<Course> courseList = new ArrayList<Course>();
+
+    // Adding sample students and courses to the lists
+    studentList.add(new Student(1, "Alice"));
+    studentList.add(new Student(2, "Bob"));
+    courseList.add(new Course(1, "Math", 200.0));
+    courseList.add(new Course(2, "English", 150.0));
+
+    // Add an enrolment
+    C206_CaseStudy.addNewEnrolment(enrolmentList, studentList, courseList);
+    assertEquals("Check if enrolment list size is 1 after adding", 1, enrolmentList.size());
+
+    // Add another enrolment
+    C206_CaseStudy.addNewEnrolment(enrolmentList, studentList, courseList);
+    assertEquals("Check if enrolment list size is 2 after adding", 2, enrolmentList.size());
 }
 
 }

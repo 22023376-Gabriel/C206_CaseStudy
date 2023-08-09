@@ -17,7 +17,7 @@ public class C206_CaseStudy {
         
 		int option = 0;
 		
-		while (option != 9) { //Modify the quit number whenever you want
+		while (option != 7) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -62,14 +62,23 @@ public class C206_CaseStudy {
 				}
 			}
 			else if (option == 4) {
-	                addNewEnrolment(enrolmentList, studentList, courseList);
-	        } else if (option == 5) {
-	                viewAllEnrolments(enrolmentList);
-	        } else if (option == 6) {
-	                deleteEnrolment(enrolmentList);
-	        }else if(option == 7) {
+			    int enrolmentOption = 0;
+			    while (enrolmentOption != 4) {
+			        enrolmentMenu();
+			        enrolmentOption = Helper.readInt("Enter an option > ");
+
+			        if (enrolmentOption == 1) {
+			            addNewEnrolment(enrolmentList, studentList, courseList);
+			        } else if (enrolmentOption == 2) {
+			            viewAllEnrolments(enrolmentList);
+			        } else if (enrolmentOption == 3) {
+			            deleteEnrolment(enrolmentList);
+			        }
+			    }
+
+	        }else if(option == 5) {
 	        		addNewStudent(studentList);
-	        }else if (option == 8) {
+	        }else if (option == 6) {
 	        		removeStudent(studentList);
 	        }
 		}
@@ -82,12 +91,10 @@ public class C206_CaseStudy {
 		System.out.println("1. User Management");
 		System.out.println("2. Display All Students");
 		System.out.println("3. Course Management");
-		System.out.println("4. Add New Enrollment");
-		System.out.println("5. Display All Enrolments");
-		System.out.println("6. Remove Enrolment");
-		System.out.println("7. Add New Student");
-		System.out.println("8. Remove Student");
-		System.out.println("9. Quit");
+		System.out.println("4. Enrolment Management");
+		System.out.println("5. Add New Student");
+		System.out.println("6. Remove Student");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -102,6 +109,17 @@ public class C206_CaseStudy {
 		System.out.println("4. Remove Course");
 		System.out.println("5. Quit");
 		Helper.line(80, "-");
+		
+	}
+	public static void enrolmentMenu() {
+	    Helper.line(80, "-");
+	    System.out.println("ENROLMENT MANAGEMENT");
+	    Helper.line(80, "-");
+	    System.out.println("1. Add New Enrolment");
+	    System.out.println("2. View All Enrolments");
+	    System.out.println("3. Delete Enrolment");
+	    System.out.println("4. Back to Main Menu");
+	    Helper.line(80, "-");
 	}
 	
 	public static void viewAllStudents(ArrayList<Student> studentList) {
@@ -127,11 +145,11 @@ public class C206_CaseStudy {
 		String courseName = Helper.readString("Enter Course Name > ");
 		double courseFee = Helper.readDouble("Enter Course Fees > ");
 		
-		boolean courseAvaliableId = false;
+		boolean courseAvaliableId = true;
 		
 		for (Course course : courseList) {
             if (course.getCourseID() != courseID) {
-            	courseAvaliableId = true;
+            	courseAvaliableId = false;
                 break;
             }
         }
@@ -212,8 +230,8 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	
-	 public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
+
+ public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
 	            ArrayList<Course> courseList) {
 	        int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
 	        int studentId = Helper.readInt("Enter Student ID: ");
