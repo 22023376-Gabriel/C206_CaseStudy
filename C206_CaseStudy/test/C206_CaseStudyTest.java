@@ -70,7 +70,20 @@ public void testViewAllUsers() {
 
 @Test 
 public void testAddUser() {
-	//Test if 
+	//Test that the list is not null so users can be added to it
+    assertNotNull("Test if there is a valid user arraylist to add items to", userList);
+    
+    //Test that a previously empty list which has a user added to it has a size of 1
+    C206_CaseStudy.addNewUser(userList, user1);
+    assertEquals("Test that the userlist has a size of 1",1,userList.size());
+    
+    //Test that when another item is added the size increases to 2
+    C206_CaseStudy.addNewUser(userList, user2);
+    assertEquals("Test that the userlist has a size of 2",2,userList.size());
+
+    //Test that when a new user with duplicate details is inputted, it is not added to the list
+    C206_CaseStudy.addNewUser(userList, user2);
+    assertNotEquals("Test that the userlist size does not increase",2,userList.size());
 }
 @Test
 public void testAddNewEnrolment() {

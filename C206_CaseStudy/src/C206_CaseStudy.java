@@ -24,16 +24,14 @@ public class C206_CaseStudy {
             if (option == 1) {
                 int userOption = 0;
                 while (userOption != 2) {
-                    Helper.line(70, "-");
-                    System.out.println("USER MANAGEMENT");
-                    Helper.line(70, "-");
-                    System.out.println("1.View users");
-                    System.out.println("2.Quit");
-
+                	userMenu();
                     userOption = Helper.readInt("Enter an option > ");
                     if (userOption == 1) {
                        String output = viewAllUsers(userList);
                         System.out.println(output);
+                    }
+                    else if(userOption ==2) {
+                    	addNewUser(userList);
                     }
                 }
             }
@@ -121,6 +119,15 @@ public class C206_CaseStudy {
 	    System.out.println("4. Back to Main Menu");
 	    Helper.line(80, "-");
 	}
+	public static void userMenu() {
+	    Helper.line(70, "-");
+	    System.out.println("USER MANAGEMENT");
+	    Helper.line(70, "-");
+	    System.out.println("1.View users");
+	    System.out.println("2. Add user");
+	    System.out.println("3.Quit");
+	}
+	
 	
 	public static String viewAllStudents(ArrayList<Student> studentList) {
 		
@@ -131,6 +138,44 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	 public static void addNewUser(ArrayList<User> userList) {
+	    	String userType = Helper.readString("What type of user are you adding? (Admin/Teacher)");
+	    	boolean validOption = false;
+	    	String name;
+	    	String email;
+	    	String password;
+	    	String mobileNum;
+	    	String homeNum;
+	    	int adminId = 0;
+	    	
+	    	while(validOption == false) {
+		    	if(userType == "Admin" || userType == "admin") {
+		    		validOption = true;
+		    		boolean validID = false;
+		    		name = Helper.readString("Enter username > ");
+		    		while (validID == false) {
+			    		adminId = Helper.readInt("Enter adminID");
+				    		for(User a : userList) {
+				    			if(a instanceof Admin && ((Admin) a).getAdminId() == adminId) {
+				    				System.out.println("Duplicate ID! Please enter a new one!");
+				    			} else {
+				    				validID = true;
+				    			}
+				    		}
+		    		}
+		    		email = Helper.readString("Enter email > ");
+		    		password = Helper.readString("Enter Password > ");
+		    		mobileNum = Helper.readString("Enter mobileNum > ");
+		    		homeNum = Helper.readString("Enter homeNum > ");
+		    		userList.add(new Admin(name, adminId, password, userType, email, mobileNum, homeNum));
+		    	}
+		    	else if (userType == "Teacher" || userType == "teacher") {
+		    		validOption = true;
+		    	} else {
+		    		System.out.println("Please enter a valid option! (Admin/Teacher");
+		    	}
+	    	}
+	    }
 	
 	public static void viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
