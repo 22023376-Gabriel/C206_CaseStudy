@@ -86,6 +86,20 @@ public void testAddUser() {
     assertNotEquals("Test that the userlist size does not increase",2,userList.size());
 }
 @Test
+public void testDeleteUser() {
+    userList.add(user1);
+    userList.add(user2);
+    userList.add(user3);
+    userList.add(user4);
+	//Test that the list updates when a user is deleted
+    C206_CaseStudy.deleteUser(userList, 3, "Admin");
+	assertEquals("Test that the userList size decreases",3,userList.size());
+	//Test that the list does not update when an invalid user is deleted
+    C206_CaseStudy.deleteUser(userList, 3, "Admin");
+
+}
+
+@Test
 public void testAddNewEnrolment() {
     ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
     ArrayList<Student> studentList = new ArrayList<Student>();
