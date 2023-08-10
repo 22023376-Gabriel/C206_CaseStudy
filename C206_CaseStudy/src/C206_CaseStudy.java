@@ -13,7 +13,8 @@ public class C206_CaseStudy {
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
-
+		courseList.add(new Course(1, "C209", 23.70));
+		courseList.add(new Course(2, "C235", 25.90));
         
 		int option = 0;
 		
@@ -121,7 +122,7 @@ public class C206_CaseStudy {
 		}
 
 
-	
+	//Menus
 	public static void menu() {
 		Helper.line(80, "-");
 		System.out.println("TUITION MANAGEMENT MENU");
@@ -300,23 +301,40 @@ public class C206_CaseStudy {
 	}
 	
 	public static void addNewCourse(ArrayList<Course> courseList) {
+		//courseID
 		int courseID = Helper.readInt("Enter Course ID > ");
-		String courseName = Helper.readString("Enter Course Name > ");
-		double courseFee = Helper.readDouble("Enter Course Fees > ");
-		
-		boolean courseAvaliableId = true;
+		boolean courseAvaliableId = false;
 		
 		for (Course course : courseList) {
             if (course.getCourseID() != courseID) {
-            	courseAvaliableId = false;
+            	courseAvaliableId = true;
+            	}
+            break;
+        }
+		
+        if (courseAvaliableId == true) {
+        	//courseName
+        	String courseName = Helper.readString("Enter Course Name > ");
+    		boolean courseAvaliableName = false;
+    		
+    		for (Course course : courseList) {
+                if (course.getCourseName() != courseName) {
+                	courseAvaliableName = true;
+                	}
                 break;
             }
-        }
-
-        if (courseAvaliableId) {
-            Course course = new Course(courseID, courseName, courseFee);
-            courseList.add(course);
-            System.out.println("Course added successfully.");
+    		
+    		if (courseAvaliableName == true) {
+    			//course fees & add
+    			double courseFee = Helper.readDouble("Enter Course Fees > ");
+    			
+                Course course = new Course(courseID, courseName, courseFee);
+                courseList.add(course);
+                System.out.println("Course added successfully.");
+                
+            } else {
+            	System.out.println("Error: Course Name is not available.");
+            }
         } else {
             System.out.println("Error: Course ID is not available.");
         }

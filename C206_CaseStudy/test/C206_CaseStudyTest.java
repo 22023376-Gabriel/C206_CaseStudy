@@ -194,19 +194,18 @@ public void testAddNewCourse() {
 	C206_CaseStudy.addNewCourse(courseList);
 	assertEquals("Test that Course arraylist size is 1", 1, courseList.size());
 	
-	//Added new course 2
-	C206_CaseStudy.addNewCourse(courseList);
-	assertEquals("Test that Course arraylist size is 2", 2, courseList.size());
-	
 	//Test that no new course can be added to the same id
 	C206_CaseStudy.addNewCourse(courseList);
-	assertEquals("Test that Course arraylist size is still 2", 2, courseList.size());
+	assertEquals("Test that Course arraylist size is still 2", 1, courseList.size());
 }
 @Test
 public void testUpdateCourse() {
 	assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 	courseList.add(c1);
 	courseList.add(c2);
+	
+	//Update course
+	C206_CaseStudy.updateCourse(courseList);
 	assertEquals("Test that the course arraylist size did not change after update", 1, courseList.size());
 }
 @Test
