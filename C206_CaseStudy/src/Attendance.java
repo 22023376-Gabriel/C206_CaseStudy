@@ -1,47 +1,23 @@
-import java.sql.Date;
-
 public class Attendance {
     private int attendanceId;
-    private Student student;
-    private Course course;
-    private Date date;
-
-    public Attendance(int attendanceId, Student student, Course course, Date date) {
+    private int enrolmentId;
+    private String attendanceDate;
+    
+    public Attendance(int attendanceId, int enrolmentId, String attendanceDate) {
         this.attendanceId = attendanceId;
-        this.student = student;
-        this.course = course;
-        this.date = date;
+        this.enrolmentId = enrolmentId;
+        this.attendanceDate = attendanceDate;
     }
-
+    
     public int getAttendanceId() {
         return attendanceId;
     }
-
-    public void setAttendanceId(int attendanceId) {
-        this.attendanceId = attendanceId;
+    
+    public int getEnrolmentId() {
+        return enrolmentId;
     }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    
+    public String getAttendanceDate() {
+        return attendanceDate;
     }
 }

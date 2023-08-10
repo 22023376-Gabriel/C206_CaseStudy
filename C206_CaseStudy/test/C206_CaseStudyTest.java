@@ -10,8 +10,12 @@ import java.util.ArrayList;
 
 public class C206_CaseStudyTest {
 	private ArrayList<Student> studentList;
+    private ArrayList<Attendance> attendanceList;
+    private ArrayList<Enrolment> enrolmentList;
+
     ArrayList<User> userList = new ArrayList<User>();
     private ArrayList<Course> courseList;
+    ArrayList<Fees> feeList;
     
 	private Admin user1;
 	private Admin user2;
@@ -21,6 +25,8 @@ public class C206_CaseStudyTest {
 	private Student s2;
 	private Course c1;
 	private Course c2;
+	private Fees f1;
+	private Fees f2;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -33,13 +39,17 @@ public class C206_CaseStudyTest {
 		user4 = new Teacher("Rahman Syed", 2, "p@ssT3st1ng", "Teacher", "RahmanSyed@gmail.com", "8331 5820", "9321 3888"); 
 		c1 = new Course(1, "C209", 23.70);
 		c2 = new Course(2, "C235", 25.90);
+		f1 = new Fees("Tuition", 50.10, "06/11/2023", 1);
+		f2 = new Fees("Admin", 5.50, "06/11/2023", 2);
 		
 		userList = new ArrayList<User>();//For User testing
 		studentList = new ArrayList<Student>();
 		courseList = new ArrayList<Course>();
+		feeList = new ArrayList<Fees>();
+
 	}
 
-	@After
+	@After 
 	public void tearDown() throws Exception {
 	}
 
@@ -104,7 +114,7 @@ public void testDeleteUser() {
 	assertEquals("Test that the userList size decreases",3,userList.size());
 	//Test that the list does not update when an invalid user is deleted
     C206_CaseStudy.deleteUser(userList, 3, "Admin");
-
+    assertNotEquals("Test that the userList size does not decrease",2,userList.size());
 }
 
 @Test
@@ -224,6 +234,46 @@ public void testRemoveStudent() {
 	
 }
 @Test
+public void testDeleteAttendance() {
+    // Prepare attendance list
+    attendanceList.add(new Attendance(1, 1, "01/08/2023"));
+    attendanceList.add(new Attendance(2, 2, "02/08/2023"));
+
+    // Test deleting an existing attendance
+    C206_CaseStudy.deleteAttendance(attendanceList);
+    assertEquals("Test that the attendance list size decreases", 1, attendanceList.size());
+
+    // Test deleting a non-existing attendance (should not decrease the size)
+    C206_CaseStudy.deleteAttendance(attendanceList);
+    assertEquals("Test that the attendance list size remains the same", 1, attendanceList.size());
+}
+
+@Test
+public void testAddNewAttendance() {
+    // Prepare enrolment list
+    enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
+    enrolmentList.add(new Enrolment(2, 2, 2, "02/08/2023"));
+
+    // Test adding a single attendance
+    C206_CaseStudy.addNewAttendance(attendanceList, enrolmentList);
+    assertEquals("Test that attendance list has a size of 1", 1, attendanceList.size());
+
+    // Test adding multiple attendances
+    C206_CaseStudy.addNewAttendance(attendanceList, enrolmentList);
+    assertEquals("Test that attendance list has a size of 2", 2, attendanceList.size());
+}
+
+@Test
+public void testViewAllAttendances() {
+    // Prepare expected output
+    String expectedOutput = String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
+    expectedOutput += String.format("%-12d %-10d %-15s\n", 1, 1, "01/08/2023");
+    expectedOutput += String.format("%-12d %-10d %-15s\n", 2, 2, "02/08/2023");
+
+    // Call the method and compare output
+    String output = C206_CaseStudy.viewAllAttendances(attendanceList);
+    assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
+}
 public void testViewAllCourses() {
     assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 
@@ -276,4 +326,57 @@ public void testDeleteCourse() {
 	courseList.remove(c1);
 	assertEquals("Test that there is 1 in course arraylist", 1, courseList.size());
 }
+@Test
+public void testViewAllFees() {
+    // Test if Item list is not null but empty - boundary
+    assertNotNull("Test if there is a valid user arraylist to retrieve items from", feeList);
+
+    // test if the list of users retrieved from the SourceCentre is empty - boundary
+    String allFees = C206_CaseStudy.viewAllFees(feeList);
+    String testOutput = "";
+
+    assertEquals("Check viewAllFees", testOutput, allFees);
+
+    // Given an empty list, after adding 4 users, test if the list is not empty
+    feeList.add(f1);
+    feeList.add(f2);
+    assertNotEquals("Test that the user arraylist size is not empty", 0, feeList.size());
+
+    // test if the expected output string same as the list of users retrieved from the SourceCentre
+    allFees = C206_CaseStudy.viewAllFees(feeList);
+    testOutput += String.format("%-15s %-20.2f %-40s %-5d\\n", "Tuition",50.10, "06/11/2023", 1);
+    testOutput += String.format("%-15s %-20.2f %-40s %-5d\\n", "Admin",5.50, "06/11/2023", 2);
+
+    assertEquals("Test that ViewAllFees list works", testOutput, allFees);
 }
+@Test 
+public void testAddFees() {
+	//Test that the list is not null so users can be added to it
+    assertNotNull("Test if there is a valid fees arraylist to add items to", feeList);
+    
+    //Test that a previously empty list which has a user added to it has a size of 1
+    C206_CaseStudy.addNewFee(feeList, f1);
+    assertEquals("Test that the feeList has a size of 1",1,feeList.size());
+    
+    //Test that when another item is added the size increases to 2
+    C206_CaseStudy.addNewFee(feeList, f2);
+    assertEquals("Test that the feelist has a size of 2",2,feeList.size());
+
+    //Test that when a new user with duplicate details is inputted, it is not added to the list
+    C206_CaseStudy.addNewFee(feeList, f1);
+    assertNotEquals("Test that the feelist size does not increase",2,feeList.size());
+}
+@Test
+public void testDeleteFees() {
+    feeList.add(f1);
+    feeList.add(f2);
+	//Test that the list updates when a user is deleted
+    C206_CaseStudy.deleteFee(feeList,1);
+	assertEquals("Test that the feeList size decreases",1,feeList.size());
+	//Test that the list does not update when an invalid user is deleted
+    C206_CaseStudy.deleteFee(feeList, 3);
+    assertNotEquals("Test that the feeList size does not decrease",0,feeList.size());
+}
+}
+
+
