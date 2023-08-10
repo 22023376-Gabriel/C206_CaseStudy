@@ -15,11 +15,14 @@ public class C206_CaseStudy {
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
-
         
 		int option = 0;
 		
+<<<<<<< HEAD
 		while (option != 8) { //Modify the quit number whenever you want
+=======
+		while (option != 5) { //Modify the quit number whenever you want
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -42,8 +45,21 @@ public class C206_CaseStudy {
                     }
                 }
             }
-			else if (option == 2) {
-				viewAllStudents(studentList);
+			else if (option == 2) { 
+				int studentOption = 0;
+				while (studentOption != 4) {
+					studentMenu();
+					studentOption = Helper.readInt("Enter an option > ");
+					if (studentOption == 1) {
+						addNewStudent(studentList);
+					}else if (studentOption == 2) {
+						viewAllStudents(studentList);
+					}else if (studentOption == 3) {
+						removeStudent(studentList);
+					}
+					
+				}
+				
 				
 			}
 			else if (option == 3) {
@@ -81,10 +97,13 @@ public class C206_CaseStudy {
 			        }
 			    }
 
+	       
+
 	        }else if(option == 5) {
 	        		addNewStudent(studentList);
 	        }else if (option == 6) {
 	        		removeStudent(studentList);
+<<<<<<< HEAD
 	        
 		} else if (option == 7) {
 	        int attendanceOption = 0;
@@ -98,22 +117,54 @@ public class C206_CaseStudy {
 	            } else if (attendanceOption == 3) {
 	                deleteAttendance(attendanceList);
 	            }
+=======
+	        }else if(option == 7) {
+	        	int feeOption = 0;
+	        	feeMenu();
+	        	feeOption = Helper.readInt("Enter an option > ");
+	        	
+	        	if(feeOption == 1) {
+	        		String output = viewAllFees(feeList);
+	        		System.out.println(output);
+	        	}
+	        	else if(feeOption == 2) {
+	        		Fees newFee = feeInput();
+	        		addNewFee(feeList,newFee);
+	        	}
+	        	else if(feeOption == 3) {
+	        		deleteFee(feeList);
+	        	}
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 	        }
+<<<<<<< HEAD
 		}}
 		
 	}
+=======
+
+		}
+
+		}
+
+
+	//Menus
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 	public static void menu() {
 		Helper.line(80, "-");
 		System.out.println("TUITION MANAGEMENT MENU");
 		Helper.line(80, "-");		
 		System.out.println("1. User Management");
-		System.out.println("2. Display All Students");
+		System.out.println("2. Student Management");
 		System.out.println("3. Course Management");
 		System.out.println("4. Enrolment Management");
+<<<<<<< HEAD
 		System.out.println("5. Add New Student");
 		System.out.println("6. Remove Student");
 		System.out.println("7. Attendance Management");
 		System.out.println("8. Quit");
+=======
+		System.out.println("5. Quit");
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 		Helper.line(80, "-");
 
 	}
@@ -149,7 +200,29 @@ public class C206_CaseStudy {
 	    System.out.println("3. Delete user");
 	    System.out.println("4. Quit");
 	}
+
+	public static void studentMenu() {
+	    Helper.line(80, "-");
+	    System.out.println("STUDENT MANAGEMENT");
+	    Helper.line(80, "-");
+	    System.out.println("1. Add New Student");
+	    System.out.println("2. View All Students");
+	    System.out.println("3. Delete Student");
+	    System.out.println("4. Back to Main Menu");
+	    Helper.line(80, "-");
+	}
 	
+
+	public static void feeMenu() {
+	    Helper.line(70, "-");
+	    System.out.println("FEE MANAGEMENT");
+	    Helper.line(70, "-");
+	    System.out.println("1. View fees");
+	    System.out.println("2. Add fee");
+	    System.out.println("3. Delete fee");
+	    System.out.println("4. Quit");
+	}
+
 	
 	public static String viewAllStudents(ArrayList<Student> studentList) {
 		
@@ -158,6 +231,7 @@ public class C206_CaseStudy {
 		for (int i = 0; i< studentList.size(); i++) {
 			output += String.format("%-5d %-15s %-15.2f %-10s\n", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getAmountfee(), studentList.get(i).getDueDate());
 		}
+		System.out.println(output);
 		return output;
 	}
 	public static User newUserInput(ArrayList<User> userList) {
@@ -249,33 +323,49 @@ public class C206_CaseStudy {
 		 }
 	 }
 	
-	public static void viewAllCourses(ArrayList<Course> courseList) {
+	public static String viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
 		output += String.format("%-5s %-10s %-10s", "ID", "Name", "Course Fee");
 		for (int i = 0; i < courseList.size(); i++) {
 			output += String.format("\n%-5d %-10s $%-10.2f", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
 		}
 		System.out.println(output);
+		return output;
 	}
 	
 	public static void addNewCourse(ArrayList<Course> courseList) {
+		//courseID
 		int courseID = Helper.readInt("Enter Course ID > ");
-		String courseName = Helper.readString("Enter Course Name > ");
-		double courseFee = Helper.readDouble("Enter Course Fees > ");
-		
 		boolean courseAvaliableId = true;
 		
 		for (Course course : courseList) {
-            if (course.getCourseID() != courseID) {
+            if (course.getCourseID() == courseID) {
             	courseAvaliableId = false;
-                break;
-            }
+            	}
         }
-
-        if (courseAvaliableId) {
-            Course course = new Course(courseID, courseName, courseFee);
-            courseList.add(course);
-            System.out.println("Course added successfully.");
+		
+        if (courseAvaliableId == true) {
+        	//courseName
+        	String courseName = Helper.readString("Enter Course Name > ");
+    		boolean courseAvaliableName = true;
+    		
+    		for (Course course : courseList) {
+                if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                	courseAvaliableName = false;
+                	}
+            }
+    		
+    		if (courseAvaliableName == true) {
+    			//course fees & add
+    			double courseFee = Helper.readDouble("Enter Course Fees > ");
+    			
+                Course course = new Course(courseID, courseName, courseFee);
+                courseList.add(course);
+                System.out.println("Course added successfully.");
+                
+            } else {
+            	System.out.println("Error: Course Name is not available.");
+            }
         } else {
             System.out.println("Error: Course ID is not available.");
         }
@@ -465,6 +555,7 @@ public class C206_CaseStudy {
 	    		System.out.println("Student successfully removed.");
 	    	}
 	    }
+<<<<<<< HEAD
 
 public static void addNewAttendance(ArrayList<Attendance> attendanceList, ArrayList<Enrolment> enrolmentList) {
     int attendanceId = Helper.readInt("Enter Attendance ID: ");
@@ -517,4 +608,44 @@ public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
         System.out.println("Error: Attendance ID not found.");
     }
 }
+=======
+	    public static Fees feeInput() {
+	    	String feeName = Helper.readString("Enter fee name > ");
+	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
+	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
+	    	int feeId = Helper.readInt("Enter fee Id > ");
+	    	
+	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
+			return newFee;
+	    }
+	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {
+	    	feeList.add(newFee);
+	    }
+	    public static String viewAllFees(ArrayList<Fees> feeList) {
+			System.out.println(String.format("%-15s %-20s %-40s %-5s" ,"Name", "Fee amount", "Due Date","Fee id"));
+			String output = "";
+			for (int i = 0; i< feeList.size(); i++) {
+				output += String.format("%-15s %-20.2f %-40s %-5d\n",feeList.get(i).getFeeName(),feeList.get(i).getFeeAmount(),feeList.get(i).getDueDate(),feeList.get(i).getFeeId());
+			}
+			return output;
+	    }
+	    public static void deleteFee(ArrayList<Fees> feeList) {
+	    	boolean foundFee = false;
+	    	int deleteId = Helper.readInt("Enter fee id > ");
+			 while(foundFee == false) {
+				 for(Fees f : feeList) {
+					 if(f.getFeeId() == deleteId) {
+						 feeList.remove(f);
+						 foundFee = true;
+						 System.out.println("Fee successfully deleted!");
+						 break;
+					 }
+				 }
+				 if(foundFee == false) {
+		                System.out.println("Invalid fee ID. Please try again.");
+		                deleteId = Helper.readInt("Enter user id > ");
+				 }
+			 }
+	    }
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 	}

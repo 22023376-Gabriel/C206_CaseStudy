@@ -1,4 +1,6 @@
 import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +14,7 @@ public class C206_CaseStudyTest {
     private ArrayList<Enrolment> enrolmentList;
 
     ArrayList<User> userList = new ArrayList<User>();
+    private ArrayList<Course> courseList;
     
 	private Admin user1;
 	private Admin user2;
@@ -19,6 +22,8 @@ public class C206_CaseStudyTest {
 	private Teacher user4;
 	private Student s1;
 	private Student s2;
+	private Course c1;
+	private Course c2;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -29,9 +34,12 @@ public class C206_CaseStudyTest {
 		user2 = new Admin("Admin2", 2, "adminP@ssw3rd", "Admin", "TuitionManagement2@gmail.com", "9123 4537", "9523 4127");
 		user3 = new Teacher("Joseph Neo", 1, "p@ssT3st", "Teacher", "JNeo@yahoo.com", "8990 5902");
 		user4 = new Teacher("Rahman Syed", 2, "p@ssT3st1ng", "Teacher", "RahmanSyed@gmail.com", "8331 5820", "9321 3888"); 
+		c1 = new Course(1, "C209", 23.70);
+		c2 = new Course(2, "C235", 25.90);
 		
 		userList = new ArrayList<User>();//For User testing
 		studentList = new ArrayList<Student>();
+		courseList = new ArrayList<Course>();
 	}
 
 	@After 
@@ -122,6 +130,63 @@ public void testAddNewEnrolment() {
     C206_CaseStudy.addNewEnrolment(enrolmentList, studentList, courseList);
     assertEquals("Check if enrolment list size is 2 after adding", 2, enrolmentList.size());
 }
+
+@Test
+public void testViewEnrolments() {
+    ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+
+    // Create sample enrolments
+    enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
+    enrolmentList.add(new Enrolment(2, 2, 2, "01/08/2023"));
+
+    // Test if the enrolment list is not null but empty - boundary
+    assertNotNull("Test if there is a valid enrolment arraylist to retrieve items from", enrolmentList);
+
+    // Capture the console output
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outContent));
+
+    // Call the viewAllEnrolments method
+    C206_CaseStudy.viewAllEnrolments(enrolmentList);
+
+    // Expected output
+    String expectedOutput = "Enrolment ID Course ID  Student ID  Enrolment Date\n"
+            + "1            1          1           01/08/2023    \n"
+            + "2            2          2           01/08/2023    \n";
+
+    // Compare the captured output with the expected output
+    assertEquals("Test that ViewAllEnrolments works", expectedOutput, outContent.toString());
+
+    // Reset the standard output
+    System.setOut(System.out);
+}
+@Test
+public void testDeleteEnrolment() {
+    ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+
+    // Create sample enrolments
+    enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
+    enrolmentList.add(new Enrolment(2, 2, 2, "01/08/2023"));
+
+    // Test if the enrolment list is not null but empty - boundary
+    assertNotNull("Test if there is a valid enrolment arraylist to retrieve items from", enrolmentList);
+
+    // Capture the console output
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outContent));
+
+    // Call the deleteEnrolment method
+    C206_CaseStudy.deleteEnrolment(enrolmentList);
+
+    // Expected output
+    String expectedOutput = "Enrolment with ID [User Input] has been deleted.\n";
+
+    // Compare the captured output with the expected output
+    assertEquals("Test that deleteEnrolment works", expectedOutput, outContent.toString());
+
+    // Reset the standard output
+    System.setOut(System.out);
+}
 @Test
 public void testAddStudent() {
 	
@@ -162,6 +227,7 @@ public void testRemoveStudent() {
 	
 }
 @Test
+<<<<<<< HEAD
 public void testDeleteAttendance() {
     // Prepare attendance list
     attendanceList.add(new Attendance(1, 1, "01/08/2023"));
@@ -201,5 +267,58 @@ public void testViewAllAttendances() {
     // Call the method and compare output
     String output = C206_CaseStudy.viewAllAttendances(attendanceList);
     assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
+=======
+public void testViewAllCourses() {
+    assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
+
+    // test if the list of courses retrieved from the SourceCentre is empty - boundary
+    String allCourses = C206_CaseStudy.viewAllCourses(courseList);
+    String testOutput = "ID    Name       Course Fee";
+
+    assertEquals("Check that ViewAllCourseslist", testOutput, allCourses);
+
+    // Given an empty list, after adding 2 courses, test if the list is not empty
+    courseList.add(c1);
+    courseList.add(c2);
+
+    assertNotEquals("Test that the course arraylist size is not empty", 0, courseList.size());
+
+    // test if the expected output string same as the list of users retrieved from the SourceCentre
+    allCourses = C206_CaseStudy.viewAllCourses(courseList);
+    testOutput += String.format("\n%-5d %-10s $%-10.2f",1, "C209", 23.70);
+    testOutput += String.format("\n%-5d %-10s $%-10.2f",2, "C235", 25.90);
+    assertEquals("Test that ViewAllCourseslist works", testOutput, allCourses);
+}
+@Test
+public void testAddNewCourse() {
+	assertNotNull("Test that that is valid Student arraylist to add to", courseList);
+	
+	//Added new course 1
+	C206_CaseStudy.addNewCourse(courseList);
+	assertEquals("Test that Course arraylist size is 1", 1, courseList.size());
+	
+	//Test that no new course can be added to the same id
+	C206_CaseStudy.addNewCourse(courseList);
+	assertEquals("Test that Course arraylist size is still 2", 1, courseList.size());
+}
+@Test
+public void testUpdateCourse() {
+	assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
+	courseList.add(c1);
+	courseList.add(c2);
+	
+	//Update course
+	C206_CaseStudy.updateCourse(courseList);
+	assertEquals("Test that the course arraylist size did not change after update", 1, courseList.size());
+}
+@Test
+public void testDeleteCourse() {
+	assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
+	courseList.add(c1);
+	courseList.add(c2);
+	assertNotEquals("Test that the course arraylist size is not empty", 0, courseList.size());
+	courseList.remove(c1);
+	assertEquals("Test that there is 1 in course arraylist", 1, courseList.size());
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
 }
 }
