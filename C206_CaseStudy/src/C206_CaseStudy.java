@@ -8,9 +8,8 @@ public class C206_CaseStudy {
 		ArrayList<Course> courseList = new ArrayList<Course>();
         ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
         ArrayList<Fees> feeList = new ArrayList<Fees>();
-        ArrayList<Attendance> attendanceList = new ArrayList<Attendance>(); // Add this line
+        ArrayList<Attendance> attendanceList = new ArrayList<Attendance>(); 
 
-		
 		studentList.add(new Student(1, "Jack Park"));
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
@@ -18,8 +17,7 @@ public class C206_CaseStudy {
         
 		int option = 0;
 		
-		while (option != 8) { //Modify the quit number whenever you want
-		while (option != 5) { //Modify the quit number whenever you want
+		while (option != 7) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -55,9 +53,7 @@ public class C206_CaseStudy {
 						removeStudent(studentList);
 					}
 					
-				}
-				
-				
+				}				
 			}
 			else if (option == 3) {
 				int courseOption = 0;
@@ -93,28 +89,25 @@ public class C206_CaseStudy {
 			            deleteEnrolment(enrolmentList);
 			        }
 			    }
-
-	       
-
-	        }else if(option == 5) {
-	        		addNewStudent(studentList);
-	        }else if (option == 6) {
-	        		removeStudent(studentList);
-
-	        
-		} else if (option == 7) {
-	        int attendanceOption = 0;
-	        while (attendanceOption != 4) {
-	            attendanceMenu();
-	            attendanceOption = Helper.readInt("Enter an option > ");
-	            if (attendanceOption == 1) {
-	                addNewAttendance(attendanceList, enrolmentList);
-	            } else if (attendanceOption == 2) {
+			}
+			    
+		else if (option == 5) {
+	        	int attendanceOption = 0;
+	        	while(attendanceOption != 4) {
+	        		attendanceMenu();
+	        		attendanceOption = Helper.readInt("Enter an option > ");
+	        		if (attendanceOption == 1) {
+	        			addNewAttendance(attendanceList, enrolmentList);
+	        	} else if (attendanceOption == 2) {
 	                viewAllAttendances(attendanceList);
 	            } else if (attendanceOption == 3) {
 	                deleteAttendance(attendanceList);
 	            }
-	            else if(option == 7) {
+	        }
+		}
+	            
+			    
+else if(option == 6) {
 	        	int feeOption = 0;
 	        	feeMenu();
 	        	feeOption = Helper.readInt("Enter an option > ");
@@ -129,17 +122,17 @@ public class C206_CaseStudy {
 	        	}
 	        	else if(feeOption == 3) {
 	    	    	int deleteId = Helper.readInt("Enter fee id > ");
-	        		deleteFee(feeList, deleteId);
+	        		deleteFee(feeList,deleteId);
 	        	}
 	        }
 		}
+			    }
+			    
+			
+
 		
-	}
-
-		}}
-
-		}
-
+		
+	
 
 	//Menus
 	public static void menu() {
@@ -150,11 +143,9 @@ public class C206_CaseStudy {
 		System.out.println("2. Student Management");
 		System.out.println("3. Course Management");
 		System.out.println("4. Enrolment Management");
-		System.out.println("5. Add New Student");
-		System.out.println("6. Remove Student");
-		System.out.println("7. Attendance Management");
-		System.out.println("8. Quit");
-		System.out.println("5. Quit");
+		System.out.println("5. Attendance Management");
+		System.out.println("6. Fee Management");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -212,9 +203,18 @@ public class C206_CaseStudy {
 	    System.out.println("3. Delete fee");
 	    System.out.println("4. Quit");
 	}
-
+	public static void attendanceMenu() {
+	    Helper.line(80, "-");
+	    System.out.println("ATTENDANCE MANAGEMENT");
+	    Helper.line(80, "-");
+	    System.out.println("1. Add New Attendance");
+	    System.out.println("2. View All Attendances");
+	    System.out.println("3. Delete Attendance");
+	    System.out.println("4. Back to Main Menu");
+	    Helper.line(80, "-");
+	}
 	
-	public static String viewAllStudents(ArrayList<Student> studentList) {
+	public static String viewAllStudents(ArrayList<Student> studentList) {//Louis
 		
 		System.out.println(String.format("%-5s %-15s %-15s %-10s" , "ID", "Name", "Amount Fee", "Due Date"));
 		String output = "";
@@ -224,7 +224,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 		return output;
 	}
-	public static User newUserInput(ArrayList<User> userList) {
+	public static User newUserInput(ArrayList<User> userList) {//Gabriel
     	String userType = Helper.readString("What type of user are you adding? (Admin/Teacher)");
     	boolean validOption = false;
     	String name;
@@ -285,11 +285,11 @@ public class C206_CaseStudy {
 		
 	}
 	
-	 public static void addNewUser(ArrayList<User> userList, User newUser) {
+	 public static void addNewUser(ArrayList<User> userList, User newUser) {//Gabriel
 		 userList.add(newUser);
 	    }
 	 
-	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {
+	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {//Gabriel
 		 boolean foundUser = false;
 		 while(foundUser == false) {
 			 for(User u : userList) {
@@ -312,6 +312,57 @@ public class C206_CaseStudy {
 			 }
 		 }
 	 }
+	 public static void addNewAttendance(ArrayList<Attendance> attendanceList, ArrayList<Enrolment> enrolmentList) {
+		    int attendanceId = Helper.readInt("Enter Attendance ID: ");
+		    int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
+		    String attendanceDate = Helper.readString("Enter Attendance Date (dd/mm/yyyy): ");
+
+		    // Check if the enrolment exists
+		    boolean enrolmentExists = false;
+		    for (Enrolment enrolment : enrolmentList) {
+		        if (enrolment.getEnrolmentId() == enrolmentId) {
+		            enrolmentExists = true;
+		            break;
+		        }
+		    }
+
+		    if (enrolmentExists) {
+		        Attendance attendance = new Attendance(attendanceId, enrolmentId, attendanceDate);
+		        attendanceList.add(attendance);
+		        System.out.println("Attendance added successfully.");
+		    } else {
+		        System.out.println("Error: Enrolment ID not found.");
+		    }
+		}
+
+		public static String viewAllAttendances(ArrayList<Attendance> attendanceList) {
+		    String output = "";
+		    output += String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
+		    for (Attendance attendance : attendanceList) {
+		        output += String.format("%-12d %-10d %-15s\n", attendance.getAttendanceId(), attendance.getEnrolmentId(),
+		                attendance.getAttendanceDate());
+		    }
+		    return output; // Return the formatted output as a String
+		}
+
+
+		public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
+		    int attendanceId = Helper.readInt("Enter Attendance ID to delete: ");
+		    boolean found = false;
+
+		    for (int i = 0; i < attendanceList.size(); i++) {
+		        if (attendanceList.get(i).getAttendanceId() == attendanceId) {
+		            attendanceList.remove(i);
+		            found = true;
+		            System.out.println("Attendance with ID " + attendanceId + " has been deleted.");
+		            break;
+		        }
+		    }
+
+		    if (!found) {
+		        System.out.println("Error: Attendance ID not found.");
+		    }
+		}
 	
 	public static String viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
@@ -394,8 +445,21 @@ public class C206_CaseStudy {
 			for (int i = 0; i < courseList.size(); i++) {
 				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
 					String newName = Helper.readString("Enter New Course Name > ");
-					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
-					courseList.get(i).setCourseName(newName);
+					boolean courseAvaliableName = true;
+		    		
+		    		for (Course course : courseList) {
+		                if (course.getCourseName().equalsIgnoreCase(newName)) {
+		                	courseAvaliableName = false;
+		                	}
+		            }
+		    		
+		    		if (courseAvaliableName == true) {
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+						courseList.get(i).setCourseName(newName);
+						
+		    		} else {
+		    			System.out.println("Error: Course Name is not available.");
+		    		}
 				}
 			}
 		}
@@ -416,30 +480,29 @@ public class C206_CaseStudy {
 			for (int i = 0; i < courseList.size(); i++) {
 				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
 					String newName = Helper.readString("Enter New Course Name > ");
-					double newFee = Helper.readDouble("Enter New Fee Amount > ");
-
-					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
-					System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
-			
-					courseList.get(i).setCourseName(newName);
-					courseList.get(i).setCourseFee(newFee);
-
+					boolean courseAvaliableName = true;
+		    		
+		    		for (Course course : courseList) {
+		                if (course.getCourseName().equalsIgnoreCase(newName)) {
+		                	courseAvaliableName = false;
+		                	}
+		            }
+		    		
+		    		if (courseAvaliableName == true) {
+						double newFee = Helper.readDouble("Enter New Fee Amount > ");
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+						System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
+				
+						courseList.get(i).setCourseName(newName);
+						courseList.get(i).setCourseFee(newFee);
+						
+		    		} else {
+		    			System.out.println("Error: Course Name is not available.");
+		    		}
 				}
 			}
 		}
 	}
-	
-	public static void attendanceMenu() {
-	    Helper.line(80, "-");
-	    System.out.println("ATTENDANCE MANAGEMENT");
-	    Helper.line(80, "-");
-	    System.out.println("1. Add New Attendance");
-	    System.out.println("2. View All Attendances");
-	    System.out.println("3. Delete Attendance");
-	    System.out.println("4. Back to Main Menu");
-	    Helper.line(80, "-");
-	}
-
 
  public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
 	            ArrayList<Course> courseList) {
@@ -512,7 +575,7 @@ public class C206_CaseStudy {
 	        }
 	        return output;
 	    }
-	    public static void addNewStudent(ArrayList<Student> studentList) {
+	    public static void addNewStudent(ArrayList<Student> studentList) {//Louis
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	String name = Helper.readString("Enter Student Name: ");
 	    	boolean duplicate = false;
@@ -530,7 +593,7 @@ public class C206_CaseStudy {
 	    		
 	    	}
 	    }
-	    public static void removeStudent(ArrayList<Student> studentList) {
+	    public static void removeStudent(ArrayList<Student> studentList) {//Louis
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	boolean found = false;
 	    	for (int i = 0; i<studentList.size();i++) {
@@ -545,60 +608,7 @@ public class C206_CaseStudy {
 	    		System.out.println("Student successfully removed.");
 	    	}
 	    }
-
-public static void addNewAttendance(ArrayList<Attendance> attendanceList, ArrayList<Enrolment> enrolmentList) {
-    int attendanceId = Helper.readInt("Enter Attendance ID: ");
-    int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
-    String attendanceDate = Helper.readString("Enter Attendance Date (dd/mm/yyyy): ");
-
-    // Check if the enrolment exists
-    boolean enrolmentExists = false;
-    for (Enrolment enrolment : enrolmentList) {
-        if (enrolment.getEnrolmentId() == enrolmentId) {
-            enrolmentExists = true;
-            break;
-        }
-    }
-
-    if (enrolmentExists) {
-        Attendance attendance = new Attendance(attendanceId, enrolmentId, attendanceDate);
-        attendanceList.add(attendance);
-        System.out.println("Attendance added successfully.");
-    } else {
-        System.out.println("Error: Enrolment ID not found.");
-    }
-}
-
-public static String viewAllAttendances(ArrayList<Attendance> attendanceList) {
-    String output = "";
-    output += String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
-    for (Attendance attendance : attendanceList) {
-        output += String.format("%-12d %-10d %-15s\n", attendance.getAttendanceId(), attendance.getEnrolmentId(),
-                attendance.getAttendanceDate());
-    }
-    return output; // Return the formatted output as a String
-}
-
-
-public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
-    int attendanceId = Helper.readInt("Enter Attendance ID to delete: ");
-    boolean found = false;
-
-    for (int i = 0; i < attendanceList.size(); i++) {
-        if (attendanceList.get(i).getAttendanceId() == attendanceId) {
-            attendanceList.remove(i);
-            found = true;
-            System.out.println("Attendance with ID " + attendanceId + " has been deleted.");
-            break;
-        }
-    }
-
-    if (!found) {
-        System.out.println("Error: Attendance ID not found.");
-    }
-}
-
-	    public static Fees feeInput() {
+	    public static Fees feeInput() {//Gabriel
 	    	String feeName = Helper.readString("Enter fee name > ");
 	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
 	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
@@ -607,10 +617,10 @@ public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
 	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
 			return newFee;
 	    }
-	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {
+	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {//Gabriel
 	    	feeList.add(newFee);
 	    }
-	    public static String viewAllFees(ArrayList<Fees> feeList) {
+	    public static String viewAllFees(ArrayList<Fees> feeList) {//Gabriel
 			System.out.println(String.format("%-15s %-20s %-40s %-5s" ,"Name", "Fee amount", "Due Date","Fee id"));
 			String output = "";
 			for (int i = 0; i< feeList.size(); i++) {
@@ -635,4 +645,4 @@ public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
 				 }
 			 }
 	    }
-}
+	}
