@@ -16,7 +16,7 @@ public class C206_CaseStudy {
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
         
 		int option = 0;
-		
+
 		while (option != 7) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
@@ -645,4 +645,4 @@ else if(option == 6) {
 				 }
 			 }
 	    }
-	}
+}

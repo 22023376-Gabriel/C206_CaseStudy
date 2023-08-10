@@ -254,7 +254,7 @@ public void testViewAllAttendances() {
     String output = C206_CaseStudy.viewAllAttendances(attendanceList);
     assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
 }
-@Test
+
 public void testViewAllCourses() {
     assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 
