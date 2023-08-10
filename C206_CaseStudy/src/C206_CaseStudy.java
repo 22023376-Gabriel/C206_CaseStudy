@@ -648,4 +648,4 @@ public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
 			 }
 	    }
 >>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
-	}
+}
