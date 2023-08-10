@@ -40,7 +40,7 @@ public class C206_CaseStudy {
                     }
                 }
             }
-			else if (option == 2) { //Louis
+			else if (option == 2) { 
 				int studentOption = 0;
 				while (studentOption != 4) {
 					studentMenu();
