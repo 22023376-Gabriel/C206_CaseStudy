@@ -7,7 +7,7 @@ public class C206_CaseStudy {
 		ArrayList<User> userList = new ArrayList<User>();
 		ArrayList<Course> courseList = new ArrayList<Course>();
         ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
-
+        ArrayList<Fees> feeList = new ArrayList<Fees>();
 		
 		studentList.add(new Student(1, "Jack Park"));
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
