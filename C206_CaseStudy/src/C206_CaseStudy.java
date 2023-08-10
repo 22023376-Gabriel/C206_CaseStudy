@@ -8,6 +8,13 @@ public class C206_CaseStudy {
 	private static final int USERMENUQUIT = 4;
 	private static final int MAINMENU_USER = 1;
 	private static final int MAINMENUQUIT = 7;
+	private static final int MAINMENU_COURSE = 3;
+	private static final int COURSEMENUVIEW = 1;
+	private static final int COURSEMENUADD = 2;
+	private static final int COURSEMENUEDIT = 3;
+	private static final int COURSEMENUDELETE = 4;
+	private static final int COURSEMENUQUIT = 5;
+
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ArrayList<User> userList = new ArrayList<User>();
@@ -61,22 +68,22 @@ public class C206_CaseStudy {
 					
 				}				
 			}
-			else if (option == 3) {
+			else if (option == MAINMENU_COURSE) {
 				int courseOption = 0;
-				while (courseOption != 5) {
+				while (courseOption != COURSEMENUQUIT) {
 					courseMenu();
 					courseOption = Helper.readInt("Enter an option > ");
 					
-					if (courseOption == 1) {
+					if (courseOption == COURSEMENUVIEW) {
 						viewAllCourses(courseList);
 					}
-					else if (courseOption == 2) {
+					else if (courseOption == COURSEMENUADD) {
 						addNewCourse(courseList);
 					}
-					else if (courseOption == 3) {
+					else if (courseOption == COURSEMENUEDIT) {
 						updateCourse(courseList);
 					}
-					else if (courseOption == 4) {
+					else if (courseOption == COURSEMENUDELETE) {
 						deleteCourse(courseList);
 					}
 				}
@@ -374,6 +381,8 @@ else if(option == 6) {
 		    }
 		}
 	
+		//View courses
+		//Joanna
 	public static String viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
 		output += String.format("%-5s %-10s %-10s", "ID", "Name", "Course Fee");
@@ -384,6 +393,8 @@ else if(option == 6) {
 		return output;
 	}
 	
+	//Add new course
+	//Joanna
 	public static void addNewCourse(ArrayList<Course> courseList) {
 		//courseID
 		int courseID = Helper.readInt("Enter Course ID > ");
@@ -422,6 +433,8 @@ else if(option == 6) {
         }
 	}
 	
+	//Delete course
+	//Joanna
 	public static void deleteCourse(ArrayList<Course> courseList) {
 		String removeCourse = Helper.readString("Enter Course to be removed > ");
 		boolean courseExist = false;
@@ -442,6 +455,8 @@ else if(option == 6) {
 		}
 	}
 	
+	//Update course
+	//Joanna
 	public static void updateCourse(ArrayList<Course> courseList) {
 		System.out.println("1. Update Name");
 		System.out.println("2. Update Fees");
