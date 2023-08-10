@@ -269,7 +269,7 @@ public void testViewAllCourses() {
     courseList.add(c2);
 
     assertNotEquals("Test that the course arraylist size is not empty", 0, courseList.size());
-
+    
     // test if the expected output string same as the list of users retrieved from the SourceCentre
     allCourses = C206_CaseStudy.viewAllCourses(courseList);
     testOutput += String.format("\n%-5d %-10s $%-10.2f",1, "C209", 23.70);
