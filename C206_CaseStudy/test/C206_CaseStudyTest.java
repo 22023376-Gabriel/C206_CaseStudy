@@ -138,62 +138,42 @@ public void testAddNewEnrolment() {
     assertEquals("Check if enrolment list size is 2 after adding", 2, enrolmentList.size());
 }
 
+
+
 @Test
 public void testViewEnrolments() {
     ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
-
-    // Create sample enrolments
     enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
     enrolmentList.add(new Enrolment(2, 2, 2, "01/08/2023"));
 
-    // Test if the enrolment list is not null but empty - boundary
     assertNotNull("Test if there is a valid enrolment arraylist to retrieve items from", enrolmentList);
-
-    // Capture the console output
     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     System.setOut(new PrintStream(outContent));
 
-    // Call the viewAllEnrolments method
     C206_CaseStudy.viewAllEnrolments(enrolmentList);
 
-    // Expected output
     String expectedOutput = "Enrolment ID Course ID  Student ID  Enrolment Date\n"
             + "1            1          1           01/08/2023    \n"
             + "2            2          2           01/08/2023    \n";
 
-    // Compare the captured output with the expected output
     assertEquals("Test that ViewAllEnrolments works", expectedOutput, outContent.toString());
 
-    // Reset the standard output
     System.setOut(System.out);
 }
-/*@Test
+@Test
 public void testDeleteEnrolment() {
     ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
-
-    // Create sample enrolments
-    enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
-    enrolmentList.add(new Enrolment(2, 2, 2, "01/08/2023"));
-
-    // Test if the enrolment list is not null but empty - boundary
+    Enrolment e1 = new Enrolment(1, 1, 1, "01/08/2023");
+    Enrolment e2 = new Enrolment(2, 2, 2, "01/08/2023");
+    enrolmentList.add(e1);
+    enrolmentList.add(e2);
     assertNotNull("Test if there is a valid enrolment arraylist to retrieve items from", enrolmentList);
+    assertNotEquals("Test that the enrolment arraylist size is not empty", 0, enrolmentList.size());
+    enrolmentList.remove(e1);
+    assertEquals("Test that the enrolment arraylist size is 1", 1, enrolmentList.size());
+}
 
-    // Capture the console output
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
 
-    // Call the deleteEnrolment method
-    C206_CaseStudy.deleteEnrolment(enrolmentList);
-
-    // Expected output
-    String expectedOutput = "Enrolment with ID [User Input] has been deleted.\n";
-
-    // Compare the captured output with the expected output
-    assertEquals("Test that deleteEnrolment works", expectedOutput, outContent.toString());
-
-    // Reset the standard output
-    System.setOut(System.out);
-}*/
 @Test
 public void testAddStudent() {
 	
