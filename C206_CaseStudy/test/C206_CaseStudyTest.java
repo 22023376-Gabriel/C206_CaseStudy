@@ -188,7 +188,7 @@ public void testAddStudent() { //Louis
 	assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
 }
 @Test
-public void testViewAllStudents() {//Louis
+public void testViewAllStudents() {//Louis Pan
 	assertNotNull("Test if there is a valid user arraylist to retrieve items from", studentList);
 	String allStudents = C206_CaseStudy.viewAllStudents(studentList);
     String testOutput = "";

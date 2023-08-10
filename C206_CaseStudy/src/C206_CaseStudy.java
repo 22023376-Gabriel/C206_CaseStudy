@@ -593,7 +593,7 @@ else if(option == 6) {
 	    		
 	    	}
 	    }
-	    public static void removeStudent(ArrayList<Student> studentList) {//Louis
+	    public static void removeStudent(ArrayList<Student> studentList) {//Louis Pan
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	boolean found = false;
 	    	for (int i = 0; i<studentList.size();i++) {
