@@ -603,6 +603,7 @@ public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
 			return output;
 	    }
 	    public static void deleteFee(ArrayList<Fees> feeList, int deleteId) {
+	    	//For deletion
 	    	boolean foundFee = false;
 			 while(foundFee == false) {
 				 for(Fees f : feeList) {
