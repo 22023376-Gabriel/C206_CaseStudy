@@ -255,6 +255,8 @@ public void testViewAllAttendances() {
     assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
 }
 
+@Test
+//Joanna
 public void testViewAllCourses() {
     assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 
@@ -277,6 +279,7 @@ public void testViewAllCourses() {
     assertEquals("Test that ViewAllCourseslist works", testOutput, allCourses);
 }
 @Test
+//Joanna
 public void testAddNewCourse() {
 	assertNotNull("Test that that is valid Student arraylist to add to", courseList);
 	
@@ -289,6 +292,7 @@ public void testAddNewCourse() {
 	assertEquals("Test that Course arraylist size is still 2", 1, courseList.size());
 }
 @Test
+//Joanna
 public void testUpdateCourse() {
 	assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 	courseList.add(c1);
@@ -299,6 +303,7 @@ public void testUpdateCourse() {
 	assertEquals("Test that the course arraylist size did not change after update", 2, courseList.size());
 }
 @Test
+//Joanna
 public void testDeleteCourse() {
 	assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
 	courseList.add(c1);
