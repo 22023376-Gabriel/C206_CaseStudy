@@ -35,7 +35,8 @@ public class C206_CaseStudy {
                     }
                     else if(userOption == 3) {
                		 String userType = Helper.readString("Enter usertype (Teacher/Admin) > ");
-
+               		 int id = Helper.readInt("Enter id of user > ");
+               		 deleteUser(userList,id,userType);
                     }
                 }
             }
@@ -129,8 +130,8 @@ public class C206_CaseStudy {
 	    Helper.line(70, "-");
 	    System.out.println("1. View users");
 	    System.out.println("2. Add user");
-	    System.out.println("4. Delete user");
-	    System.out.println("5. Quit");
+	    System.out.println("3. Delete user");
+	    System.out.println("4. Quit");
 	}
 	
 	
@@ -215,11 +216,13 @@ public class C206_CaseStudy {
 				 if(u instanceof Admin && ((Admin) u).getAdminId() == id && userType.equalsIgnoreCase("Admin")) {
 					 foundUser = true;
 					 userList.remove(u);
+					 System.out.println("User successfully deleted!");
 					 break;
 				 }
 				 else if(u instanceof Teacher && ((Teacher) u).getTeacherId() == id && userType.equalsIgnoreCase("Teacher")) {
 					 foundUser = true;
 					 userList.remove(u);
+					 System.out.println("User successfully deleted!");
 					 break;
 				 }
 			 }
