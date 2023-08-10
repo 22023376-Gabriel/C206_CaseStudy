@@ -13,8 +13,6 @@ public class C206_CaseStudy {
 		studentList.add(new Student(2, "Tom Roger", 500.00, "25/09/23"));
         userList.add(new Admin("admin 1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567"));
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
-		courseList.add(new Course(1, "C209", 23.70));
-		courseList.add(new Course(2, "C235", 25.90));
         
 		int option = 0;
 		
@@ -303,25 +301,23 @@ public class C206_CaseStudy {
 	public static void addNewCourse(ArrayList<Course> courseList) {
 		//courseID
 		int courseID = Helper.readInt("Enter Course ID > ");
-		boolean courseAvaliableId = false;
+		boolean courseAvaliableId = true;
 		
 		for (Course course : courseList) {
-            if (course.getCourseID() != courseID) {
-            	courseAvaliableId = true;
+            if (course.getCourseID() == courseID) {
+            	courseAvaliableId = false;
             	}
-            break;
         }
 		
         if (courseAvaliableId == true) {
         	//courseName
         	String courseName = Helper.readString("Enter Course Name > ");
-    		boolean courseAvaliableName = false;
+    		boolean courseAvaliableName = true;
     		
     		for (Course course : courseList) {
-                if (course.getCourseName() != courseName) {
-                	courseAvaliableName = true;
+                if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                	courseAvaliableName = false;
                 	}
-                break;
             }
     		
     		if (courseAvaliableName == true) {
