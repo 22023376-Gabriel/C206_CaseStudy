@@ -93,9 +93,35 @@ public class C206_CaseStudy {
 			    }
 
 	       
+
+	        }else if(option == 5) {
+	        		addNewStudent(studentList);
+	        }else if (option == 6) {
+	        		removeStudent(studentList);
+	        }else if(option == 7) {
+	        	int feeOption = 0;
+	        	feeMenu();
+	        	feeOption = Helper.readInt("Enter an option > ");
+	        	
+	        	if(feeOption == 1) {
+	        		String output = viewAllFees(feeList);
+	        		System.out.println(output);
+	        	}
+	        	else if(feeOption == 2) {
+	        		Fees newFee = feeInput();
+	        		addNewFee(feeList,newFee);
+	        	}
+	        	else if(feeOption == 3) {
+	        		deleteFee(feeList);
+	        	}
+	        }
+
 		}
+
 		}
-	}
+
+
+	
 	public static void menu() {
 		Helper.line(80, "-");
 		System.out.println("TUITION MANAGEMENT MENU");
@@ -140,6 +166,7 @@ public class C206_CaseStudy {
 	    System.out.println("3. Delete user");
 	    System.out.println("4. Quit");
 	}
+
 	public static void studentMenu() {
 	    Helper.line(80, "-");
 	    System.out.println("STUDENT MANAGEMENT");
@@ -151,6 +178,17 @@ public class C206_CaseStudy {
 	    Helper.line(80, "-");
 	}
 	
+
+	public static void feeMenu() {
+	    Helper.line(70, "-");
+	    System.out.println("FEE MANAGEMENT");
+	    Helper.line(70, "-");
+	    System.out.println("1. View fees");
+	    System.out.println("2. Add fee");
+	    System.out.println("3. Delete fee");
+	    System.out.println("4. Quit");
+	}
+
 	
 	public static String viewAllStudents(ArrayList<Student> studentList) {
 		
@@ -455,5 +493,43 @@ public class C206_CaseStudy {
 	    	}else {
 	    		System.out.println("Student successfully removed.");
 	    	}
+	    }
+	    public static Fees feeInput() {
+	    	String feeName = Helper.readString("Enter fee name > ");
+	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
+	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
+	    	int feeId = Helper.readInt("Enter fee Id > ");
+	    	
+	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
+			return newFee;
+	    }
+	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {
+	    	feeList.add(newFee);
+	    }
+	    public static String viewAllFees(ArrayList<Fees> feeList) {
+			System.out.println(String.format("%-15s %-20s %-40s %-5s" ,"Name", "Fee amount", "Due Date","Fee id"));
+			String output = "";
+			for (int i = 0; i< feeList.size(); i++) {
+				output += String.format("%-15s %-20.2f %-40s %-5d\n",feeList.get(i).getFeeName(),feeList.get(i).getFeeAmount(),feeList.get(i).getDueDate(),feeList.get(i).getFeeId());
+			}
+			return output;
+	    }
+	    public static void deleteFee(ArrayList<Fees> feeList) {
+	    	boolean foundFee = false;
+	    	int deleteId = Helper.readInt("Enter fee id > ");
+			 while(foundFee == false) {
+				 for(Fees f : feeList) {
+					 if(f.getFeeId() == deleteId) {
+						 feeList.remove(f);
+						 foundFee = true;
+						 System.out.println("Fee successfully deleted!");
+						 break;
+					 }
+				 }
+				 if(foundFee == false) {
+		                System.out.println("Invalid fee ID. Please try again.");
+		                deleteId = Helper.readInt("Enter user id > ");
+				 }
+			 }
 	    }
 	}
