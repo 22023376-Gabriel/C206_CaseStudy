@@ -17,7 +17,7 @@ public class C206_CaseStudy {
         
 		int option = 0;
 		
-		while (option != 7) { //Modify the quit number whenever you want
+		while (option != 5) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -41,7 +41,20 @@ public class C206_CaseStudy {
                 }
             }
 			else if (option == 2) {
-				viewAllStudents(studentList);
+				int studentOption = 0;
+				while (studentOption != 4) {
+					studentMenu();
+					studentOption = Helper.readInt("Enter an option > ");
+					if (studentOption == 1) {
+						addNewStudent(studentList);
+					}else if (studentOption == 2) {
+						viewAllStudents(studentList);
+					}else if (studentOption == 3) {
+						removeStudent(studentList);
+					}
+					
+				}
+				
 				
 			}
 			else if (option == 3) {
@@ -79,25 +92,19 @@ public class C206_CaseStudy {
 			        }
 			    }
 
-	        }else if(option == 5) {
-	        		addNewStudent(studentList);
-	        }else if (option == 6) {
-	        		removeStudent(studentList);
-	        }
+	       
 		}
-		
+		}
 	}
 	public static void menu() {
 		Helper.line(80, "-");
 		System.out.println("TUITION MANAGEMENT MENU");
 		Helper.line(80, "-");		
 		System.out.println("1. User Management");
-		System.out.println("2. Display All Students");
+		System.out.println("2. Student Management");
 		System.out.println("3. Course Management");
 		System.out.println("4. Enrolment Management");
-		System.out.println("5. Add New Student");
-		System.out.println("6. Remove Student");
-		System.out.println("7. Quit");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -133,6 +140,16 @@ public class C206_CaseStudy {
 	    System.out.println("3. Delete user");
 	    System.out.println("4. Quit");
 	}
+	public static void studentMenu() {
+	    Helper.line(80, "-");
+	    System.out.println("STUDENT MANAGEMENT");
+	    Helper.line(80, "-");
+	    System.out.println("1. Add New Student");
+	    System.out.println("2. View All Students");
+	    System.out.println("3. Delete Student");
+	    System.out.println("4. Back to Main Menu");
+	    Helper.line(80, "-");
+	}
 	
 	
 	public static String viewAllStudents(ArrayList<Student> studentList) {
@@ -142,6 +159,7 @@ public class C206_CaseStudy {
 		for (int i = 0; i< studentList.size(); i++) {
 			output += String.format("%-5d %-15s %-15.2f %-10s\n", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getAmountfee(), studentList.get(i).getDueDate());
 		}
+		System.out.println(output);
 		return output;
 	}
 	public static User newUserInput(ArrayList<User> userList) {
