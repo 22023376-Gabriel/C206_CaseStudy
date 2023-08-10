@@ -111,7 +111,8 @@ public class C206_CaseStudy {
 	        		addNewFee(feeList,newFee);
 	        	}
 	        	else if(feeOption == 3) {
-	        		deleteFee(feeList);
+	    	    	int deleteId = Helper.readInt("Enter fee id > ");
+	        		deleteFee(feeList, deleteId);
 	        	}
 	        }
 
@@ -528,9 +529,8 @@ public class C206_CaseStudy {
 			}
 			return output;
 	    }
-	    public static void deleteFee(ArrayList<Fees> feeList) {
+	    public static void deleteFee(ArrayList<Fees> feeList, int deleteId) {
 	    	boolean foundFee = false;
-	    	int deleteId = Helper.readInt("Enter fee id > ");
 			 while(foundFee == false) {
 				 for(Fees f : feeList) {
 					 if(f.getFeeId() == deleteId) {
