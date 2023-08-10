@@ -18,8 +18,7 @@ public class C206_CaseStudy {
         
 		int option = 0;
 		
-		while (option != 8) { //Modify the quit number whenever you want
-		while (option != 5) { //Modify the quit number whenever you want
+		while (option != 7) { //Modify the quit number whenever you want
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
@@ -55,9 +54,7 @@ public class C206_CaseStudy {
 						removeStudent(studentList);
 					}
 					
-				}
-				
-				
+				}				
 			}
 			else if (option == 3) {
 				int courseOption = 0;
@@ -92,19 +89,10 @@ public class C206_CaseStudy {
 			        } else if (enrolmentOption == 3) {
 			            deleteEnrolment(enrolmentList);
 			        }
-			    }
-
-	       
-
-	        }else if(option == 5) {
-	        		addNewStudent(studentList);
-	        }else if (option == 6) {
-	        		removeStudent(studentList);
-
-	        
-		} else if (option == 7) {
+			    
+			    else if (option == 7) {
 	        int attendanceOption = 0;
-	        while (attendanceOption != 4) {
+	        while(attendanceOption != 4) {
 	            attendanceMenu();
 	            attendanceOption = Helper.readInt("Enter an option > ");
 	            if (attendanceOption == 1) {
@@ -114,7 +102,7 @@ public class C206_CaseStudy {
 	            } else if (attendanceOption == 3) {
 	                deleteAttendance(attendanceList);
 	            }
-	            else if(option == 7) {
+	            else if(option == 5) {
 	        	int feeOption = 0;
 	        	feeMenu();
 	        	feeOption = Helper.readInt("Enter an option > ");
@@ -133,13 +121,11 @@ public class C206_CaseStudy {
 	        	}
 	        }
 		}
-		
-	}
-
-		}}
-
+			    }
+			    }
+			}
 		}
-
+	}
 
 	//Menus
 	public static void menu() {
@@ -150,11 +136,9 @@ public class C206_CaseStudy {
 		System.out.println("2. Student Management");
 		System.out.println("3. Course Management");
 		System.out.println("4. Enrolment Management");
-		System.out.println("5. Add New Student");
-		System.out.println("6. Remove Student");
-		System.out.println("7. Attendance Management");
-		System.out.println("8. Quit");
-		System.out.println("5. Quit");
+		System.out.println("5. Attendance Management");
+		System.out.println("6. Fee Management");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 
 	}
