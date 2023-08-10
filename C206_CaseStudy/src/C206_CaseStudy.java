@@ -369,8 +369,21 @@ public class C206_CaseStudy {
 			for (int i = 0; i < courseList.size(); i++) {
 				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
 					String newName = Helper.readString("Enter New Course Name > ");
-					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
-					courseList.get(i).setCourseName(newName);
+					boolean courseAvaliableName = true;
+		    		
+		    		for (Course course : courseList) {
+		                if (course.getCourseName().equalsIgnoreCase(newName)) {
+		                	courseAvaliableName = false;
+		                	}
+		            }
+		    		
+		    		if (courseAvaliableName == true) {
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+						courseList.get(i).setCourseName(newName);
+						
+		    		} else {
+		    			System.out.println("Error: Course Name is not available.");
+		    		}
 				}
 			}
 		}
@@ -391,14 +404,25 @@ public class C206_CaseStudy {
 			for (int i = 0; i < courseList.size(); i++) {
 				if (courseList.get(i).getCourseName().equalsIgnoreCase(nameToUpdate)) {
 					String newName = Helper.readString("Enter New Course Name > ");
-					double newFee = Helper.readDouble("Enter New Fee Amount > ");
-
-					System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
-					System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
-			
-					courseList.get(i).setCourseName(newName);
-					courseList.get(i).setCourseFee(newFee);
-
+					boolean courseAvaliableName = true;
+		    		
+		    		for (Course course : courseList) {
+		                if (course.getCourseName().equalsIgnoreCase(newName)) {
+		                	courseAvaliableName = false;
+		                	}
+		            }
+		    		
+		    		if (courseAvaliableName == true) {
+						double newFee = Helper.readDouble("Enter New Fee Amount > ");
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+						System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
+				
+						courseList.get(i).setCourseName(newName);
+						courseList.get(i).setCourseFee(newFee);
+						
+		    		} else {
+		    			System.out.println("Error: Course Name is not available.");
+		    		}
 				}
 			}
 		}
