@@ -312,6 +312,8 @@ else if(option == 6) {
 			 }
 		 }
 	 }
+	 // Add new Attendance
+	 //George
 	 public static void addNewAttendance(ArrayList<Attendance> attendanceList, ArrayList<Enrolment> enrolmentList) {
 		    int attendanceId = Helper.readInt("Enter Attendance ID: ");
 		    int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
@@ -334,7 +336,8 @@ else if(option == 6) {
 		        System.out.println("Error: Enrolment ID not found.");
 		    }
 		}
-
+	 	// View All Attendance
+	 	// George
 		public static String viewAllAttendances(ArrayList<Attendance> attendanceList) {
 		    String output = "";
 		    output += String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
@@ -345,7 +348,8 @@ else if(option == 6) {
 		    return output; // Return the formatted output as a String
 		}
 
-
+		// Delete an existing Attendance
+		// George
 		public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
 		    int attendanceId = Helper.readInt("Enter Attendance ID to delete: ");
 		    boolean found = false;
@@ -503,7 +507,7 @@ else if(option == 6) {
 			}
 		}
 	}
-
+// Krishna
  public static void addNewEnrolment(ArrayList<Enrolment> enrolmentList, ArrayList<Student> studentList,
 	            ArrayList<Course> courseList) {
 	        int enrolmentId = Helper.readInt("Enter Enrolment ID: ");
@@ -539,6 +543,7 @@ else if(option == 6) {
 	    }
 
 	    // View all enrolments
+ 		// krishna
 	    public static void viewAllEnrolments(ArrayList<Enrolment> enrolmentList) {
 	        String output = "";
 	        output += String.format("%-10s %-10s %-10s %-15s\n", "Enrolment ID", "Course ID", "Student ID", "Enrolment Date");
@@ -550,6 +555,7 @@ else if(option == 6) {
 	    }
 
 	    // Delete an existing enrolment
+	    //Krishna
 	    public static void deleteEnrolment(ArrayList<Enrolment> enrolmentList) {
 	        int enrolmentId = Helper.readInt("Enter Enrolment ID to delete: ");
 	        boolean found = false;
