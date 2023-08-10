@@ -580,7 +580,8 @@ else if(option == 6) {
 	    	String name = Helper.readString("Enter Student Name: ");
 	    	boolean duplicate = false;
 	    	for (int i=0; i<studentList.size(); i++) {
-	    		if (studentList.get(i).getStudentID() == id) {
+	    		int studentID = studentList.get(i).getStudentID();
+				if (studentID == id) {
 	    			duplicate = true;
 	    			
 	    		}
@@ -597,7 +598,8 @@ else if(option == 6) {
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	boolean found = false;
 	    	for (int i = 0; i<studentList.size();i++) {
-	    		if (studentList.get(i).getStudentID() == id) {
+	    		int studentID = studentList.get(i).getStudentID();
+				if (studentID == id) {
 	    			found = true;
 	    			studentList.remove(i);
 	    		}
