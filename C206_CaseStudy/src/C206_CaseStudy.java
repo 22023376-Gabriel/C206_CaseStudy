@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int USERMENUDELETE = 3;
+	private static final int USERMENUADD = 2;
+	private static final int USERMENUVIEW = 1;
+	private static final int USERMENUQUIT = 4;
+	private static final int MAINMENU_USER = 1;
+	private static final int MAINMENUQUIT = 7;
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ArrayList<User> userList = new ArrayList<User>();
@@ -16,24 +22,24 @@ public class C206_CaseStudy {
         userList.add(new Teacher("Jessica Eng", 1, "123JE", "Teacher", "JessEng@gmail.com", "9321 3888", "8990 5902"));
         
 		int option = 0;
-		
-		while (option != 7) { //Modify the quit number whenever you want
+
+		while (option != MAINMENUQUIT) { 
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
-            if (option == 1) {
+            if (option == MAINMENU_USER) {
                 int userOption = 0;
-                while (userOption != 4) {
+                while (userOption != USERMENUQUIT) {
                 	userMenu();
                     userOption = Helper.readInt("Enter an option > ");
-                    if (userOption == 1) {
+                    if (userOption == USERMENUVIEW) {
                        String output = viewAllUsers(userList);
                         System.out.println(output);
                     }
-                    else if(userOption ==2) {
+                    else if(userOption ==USERMENUADD) {
                     	newUserInput(userList);
                     }
-                    else if(userOption == 3) {
+                    else if(userOption == USERMENUDELETE) {
                		 String userType = Helper.readString("Enter usertype (Teacher/Admin) > ");
                		 int id = Helper.readInt("Enter id of user > ");
                		 deleteUser(userList,id,userType);
@@ -214,7 +220,7 @@ else if(option == 6) {
 	    Helper.line(80, "-");
 	}
 	
-	public static String viewAllStudents(ArrayList<Student> studentList) {
+	public static String viewAllStudents(ArrayList<Student> studentList) {//Louis
 		
 		System.out.println(String.format("%-5s %-15s %-15s %-10s" , "ID", "Name", "Amount Fee", "Due Date"));
 		String output = "";
@@ -224,7 +230,7 @@ else if(option == 6) {
 		System.out.println(output);
 		return output;
 	}
-	public static User newUserInput(ArrayList<User> userList) {
+	public static User newUserInput(ArrayList<User> userList) {//Gabriel
     	String userType = Helper.readString("What type of user are you adding? (Admin/Teacher)");
     	boolean validOption = false;
     	String name;
@@ -248,7 +254,7 @@ else if(option == 6) {
 			    			} else {
 			    				validID = true;
 			    			}
-			    		}
+  			    		}
 	    		}
 	    		email = Helper.readString("Enter email > ");
 	    		password = Helper.readString("Enter Password > ");
@@ -285,11 +291,11 @@ else if(option == 6) {
 		
 	}
 	
-	 public static void addNewUser(ArrayList<User> userList, User newUser) {
+	 public static void addNewUser(ArrayList<User> userList, User newUser) {//Gabriel
 		 userList.add(newUser);
 	    }
 	 
-	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {
+	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {//Gabriel
 		 boolean foundUser = false;
 		 while(foundUser == false) {
 			 for(User u : userList) {
@@ -581,12 +587,13 @@ else if(option == 6) {
 	        }
 	        return output;
 	    }
-	    public static void addNewStudent(ArrayList<Student> studentList) {
+	    public static void addNewStudent(ArrayList<Student> studentList) {//Louis
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	String name = Helper.readString("Enter Student Name: ");
 	    	boolean duplicate = false;
 	    	for (int i=0; i<studentList.size(); i++) {
-	    		if (studentList.get(i).getStudentID() == id) {
+	    		int studentID = studentList.get(i).getStudentID();
+				if (studentID == id) {
 	    			duplicate = true;
 	    			
 	    		}
@@ -599,11 +606,12 @@ else if(option == 6) {
 	    		
 	    	}
 	    }
-	    public static void removeStudent(ArrayList<Student> studentList) {
+	    public static void removeStudent(ArrayList<Student> studentList) {//Louis Pan
 	    	int id = Helper.readInt("Enter Student ID: ");
 	    	boolean found = false;
 	    	for (int i = 0; i<studentList.size();i++) {
-	    		if (studentList.get(i).getStudentID() == id) {
+	    		int studentID = studentList.get(i).getStudentID();
+				if (studentID == id) {
 	    			found = true;
 	    			studentList.remove(i);
 	    		}
@@ -614,7 +622,7 @@ else if(option == 6) {
 	    		System.out.println("Student successfully removed.");
 	    	}
 	    }
-	    public static Fees feeInput() {
+	    public static Fees feeInput() {//Gabriel
 	    	String feeName = Helper.readString("Enter fee name > ");
 	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
 	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
@@ -623,10 +631,10 @@ else if(option == 6) {
 	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
 			return newFee;
 	    }
-	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {
+	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {//Gabriel
 	    	feeList.add(newFee);
 	    }
-	    public static String viewAllFees(ArrayList<Fees> feeList) {
+	    public static String viewAllFees(ArrayList<Fees> feeList) {//Gabriel
 			System.out.println(String.format("%-15s %-20s %-40s %-5s" ,"Name", "Fee amount", "Due Date","Fee id"));
 			String output = "";
 			for (int i = 0; i< feeList.size(); i++) {
@@ -638,7 +646,9 @@ else if(option == 6) {
 	    	boolean foundFee = false;
 			 while(foundFee == false) {
 				 for(Fees f : feeList) {
-					 if(f.getFeeId() == deleteId) {
+					 int checkedFeeId = f.getFeeId();
+					int feeId = checkedFeeId;
+					if(feeId == deleteId) {
 						 feeList.remove(f);
 						 foundFee = true;
 						 System.out.println("Fee successfully deleted!");
@@ -651,5 +661,9 @@ else if(option == 6) {
 				 }
 			 }
 	    }
+<<<<<<< HEAD
 	}
 
+=======
+}
+>>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
