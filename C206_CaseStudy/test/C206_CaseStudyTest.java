@@ -47,6 +47,7 @@ public class C206_CaseStudyTest {
 		courseList = new ArrayList<Course>();
 		feeList = new ArrayList<Fees>();
 		attendanceList = new ArrayList<Attendance>();
+		enrolmentList = new ArrayList<Enrolment>();
 	}
 
 	@After 
@@ -110,10 +111,10 @@ public void testDeleteUser() {
     userList.add(user3);
     userList.add(user4);
 	//Test that the list updates when a user is deleted
-    C206_CaseStudy.deleteUser(userList, 3, "Admin");
+    C206_CaseStudy.deleteUser(userList, 2, "Admin");
 	assertEquals("Test that the userList size decreases",3,userList.size());
 	//Test that the list does not update when an invalid user is deleted
-    C206_CaseStudy.deleteUser(userList, 3, "Admin");
+    C206_CaseStudy.deleteUser(userList, 2, "Admin");
     assertNotEquals("Test that the userList size does not decrease",2,userList.size());
 }
 
@@ -151,11 +152,9 @@ public void testViewEnrolments() {
     System.setOut(new PrintStream(outContent));
 
     C206_CaseStudy.viewAllEnrolments(enrolmentList);
-
-    String expectedOutput = "Enrolment ID Course ID  Student ID  Enrolment Date\n"
-            + "1            1          1           01/08/2023    \n"
-            + "2            2          2           01/08/2023    \n";
-
+    String expectedOutput = String.format("%-12s %-10s %-10s %-15s\n", "Enrolment ID", "Course ID", "Student ID", "Enrolment Date");
+    expectedOutput += String.format("%-12s %-10s %-10s %-15s\n", "1","1","1" ,"01/08/2023");
+    expectedOutput += String.format("%-12s %-10s %-10s %-15s\n", "2","2","2" ,"01/08/2023");
     assertEquals("Test that ViewAllEnrolments works", expectedOutput, outContent.toString());
 
     System.setOut(System.out);
@@ -250,6 +249,9 @@ public void testViewAllAttendances() {
     expectedOutput += String.format("%-12d %-10d %-15s\n", 1, 1, "01/08/2023");
     expectedOutput += String.format("%-12d %-10d %-15s\n", 2, 2, "02/08/2023");
 
+    attendanceList.add(new Attendance(1, 1, "01/08/2023"));
+    attendanceList.add(new Attendance(2, 2, "02/08/2023"));
+    
     // Call the method and compare output
     String output = C206_CaseStudy.viewAllAttendances(attendanceList);
     assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
@@ -351,11 +353,11 @@ public void testAddFees() {
 public void testDeleteFees() {
     feeList.add(f1);
     feeList.add(f2);
-	//Test that the list updates when a user is deleted
+	//Test that the list updates when a fee is deleted
     C206_CaseStudy.deleteFee(feeList,1);
 	assertEquals("Test that the feeList size decreases",1,feeList.size());
-	//Test that the list does not update when an invalid user is deleted
-    C206_CaseStudy.deleteFee(feeList, 3);
+	//Test that the list does not update when an invalid fee is deleted
+    C206_CaseStudy.deleteFee(feeList, 1);
     assertNotEquals("Test that the feeList size does not decrease",0,feeList.size());
 }
 }

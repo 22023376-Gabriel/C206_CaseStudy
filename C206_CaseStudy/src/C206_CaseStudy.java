@@ -15,6 +15,7 @@ public class C206_CaseStudy {
 	private static final int COURSEMENUDELETE = 4;
 	private static final int COURSEMENUQUIT = 5;
 
+	
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ArrayList<User> userList = new ArrayList<User>();
@@ -304,7 +305,6 @@ else if(option == 6) {
 	 
 	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {//Gabriel
 		 boolean foundUser = false;
-		 while(foundUser == false) {
 			 for(User u : userList) {
 				 if(u instanceof Admin && ((Admin) u).getAdminId() == id && userType.equalsIgnoreCase("Admin")) {
 					 foundUser = true;
@@ -323,7 +323,7 @@ else if(option == 6) {
 	                System.out.println("Invalid user ID. Please try again.");
 	                id = Helper.readInt("Enter user id > ");
 			 }
-		 }
+		 
 	 }
 	 // Add new Attendance
 	 //George
@@ -638,12 +638,19 @@ else if(option == 6) {
 	    	}
 	    }
 	    public static Fees feeInput() {//Gabriel
+	    	String datePattern = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";;
+
 	    	String feeName = Helper.readString("Enter fee name > ");
 	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
 	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
+	    	if(dueDate.matches(datePattern) == false) {
+	    		System.out.println("Invalid date format!");
+	    		dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
+	    	} 
 	    	int feeId = Helper.readInt("Enter fee Id > ");
 	    	
 	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
+	    	
 			return newFee;
 	    }
 	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {//Gabriel
@@ -659,7 +666,6 @@ else if(option == 6) {
 	    }
 	    public static void deleteFee(ArrayList<Fees> feeList, int deleteId) {
 	    	boolean foundFee = false;
-			 while(foundFee == false) {
 				 for(Fees f : feeList) {
 					 int checkedFeeId = f.getFeeId();
 					int feeId = checkedFeeId;
@@ -672,13 +678,10 @@ else if(option == 6) {
 				 }
 				 if(foundFee == false) {
 		                System.out.println("Invalid fee ID. Please try again.");
-		                deleteId = Helper.readInt("Enter user id > ");
+		                deleteId = Helper.readInt("Enter fee id > ");
 				 }
-			 }
+			 
 	    }
-<<<<<<< HEAD
 	}
 
-=======
-}
->>>>>>> branch 'master' of https://github.com/22023376-Gabriel/C206_CaseStudy.git
+
