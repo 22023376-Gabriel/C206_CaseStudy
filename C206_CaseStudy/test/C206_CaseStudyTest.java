@@ -170,7 +170,7 @@ public void testViewAllCourses() {
 
     // test if the list of courses retrieved from the SourceCentre is empty - boundary
     String allCourses = C206_CaseStudy.viewAllCourses(courseList);
-    String testOutput = "";
+    String testOutput = "ID    Name       Course Fee";
 
     assertEquals("Check that ViewAllCourseslist", testOutput, allCourses);
 
