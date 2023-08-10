@@ -233,13 +233,14 @@ public class C206_CaseStudy {
 		 }
 	 }
 	
-	public static void viewAllCourses(ArrayList<Course> courseList) {
+	public static String viewAllCourses(ArrayList<Course> courseList) {
 		String output = "";
 		output += String.format("%-5s %-10s %-10s", "ID", "Name", "Course Fee");
 		for (int i = 0; i < courseList.size(); i++) {
 			output += String.format("\n%-5d %-10s $%-10.2f", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
 		}
 		System.out.println(output);
+		return output;
 	}
 	
 	public static void addNewCourse(ArrayList<Course> courseList) {
