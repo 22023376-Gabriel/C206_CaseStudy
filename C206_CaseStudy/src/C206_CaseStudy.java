@@ -489,15 +489,16 @@ public static void addNewAttendance(ArrayList<Attendance> attendanceList, ArrayL
     }
 }
 
-public static void viewAllAttendances(ArrayList<Attendance> attendanceList) {
+public static String viewAllAttendances(ArrayList<Attendance> attendanceList) {
     String output = "";
     output += String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
     for (Attendance attendance : attendanceList) {
         output += String.format("%-12d %-10d %-15s\n", attendance.getAttendanceId(), attendance.getEnrolmentId(),
                 attendance.getAttendanceDate());
     }
-    System.out.println(output);
+    return output; // Return the formatted output as a String
 }
+
 
 public static void deleteAttendance(ArrayList<Attendance> attendanceList) {
     int attendanceId = Helper.readInt("Enter Attendance ID to delete: ");

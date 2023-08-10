@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class C206_CaseStudyTest {
 	private ArrayList<Student> studentList;
+    private ArrayList<Attendance> attendanceList;
+    private ArrayList<Enrolment> enrolmentList;
+
     ArrayList<User> userList = new ArrayList<User>();
     
 	private Admin user1;
@@ -31,7 +34,7 @@ public class C206_CaseStudyTest {
 		studentList = new ArrayList<Student>();
 	}
 
-	@After
+	@After 
 	public void tearDown() throws Exception {
 	}
 
@@ -157,5 +160,46 @@ public void testRemoveStudent() {
 	assertEquals("Test that there is 1 in student arraylist", 1, studentList.size());
 	
 	
+}
+@Test
+public void testDeleteAttendance() {
+    // Prepare attendance list
+    attendanceList.add(new Attendance(1, 1, "01/08/2023"));
+    attendanceList.add(new Attendance(2, 2, "02/08/2023"));
+
+    // Test deleting an existing attendance
+    C206_CaseStudy.deleteAttendance(attendanceList);
+    assertEquals("Test that the attendance list size decreases", 1, attendanceList.size());
+
+    // Test deleting a non-existing attendance (should not decrease the size)
+    C206_CaseStudy.deleteAttendance(attendanceList);
+    assertEquals("Test that the attendance list size remains the same", 1, attendanceList.size());
+}
+
+@Test
+public void testAddNewAttendance() {
+    // Prepare enrolment list
+    enrolmentList.add(new Enrolment(1, 1, 1, "01/08/2023"));
+    enrolmentList.add(new Enrolment(2, 2, 2, "02/08/2023"));
+
+    // Test adding a single attendance
+    C206_CaseStudy.addNewAttendance(attendanceList, enrolmentList);
+    assertEquals("Test that attendance list has a size of 1", 1, attendanceList.size());
+
+    // Test adding multiple attendances
+    C206_CaseStudy.addNewAttendance(attendanceList, enrolmentList);
+    assertEquals("Test that attendance list has a size of 2", 2, attendanceList.size());
+}
+
+@Test
+public void testViewAllAttendances() {
+    // Prepare expected output
+    String expectedOutput = String.format("%-10s %-10s %-15s\n", "Attendance ID", "Enrolment ID", "Attendance Date");
+    expectedOutput += String.format("%-12d %-10d %-15s\n", 1, 1, "01/08/2023");
+    expectedOutput += String.format("%-12d %-10d %-15s\n", 2, 2, "02/08/2023");
+
+    // Call the method and compare output
+    String output = C206_CaseStudy.viewAllAttendances(attendanceList);
+    assertEquals("Test if viewAllAttendances returns correct output", expectedOutput, output);
 }
 }
