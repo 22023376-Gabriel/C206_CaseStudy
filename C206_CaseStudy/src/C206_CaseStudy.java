@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int USERMENUDELETE = 3;
+	private static final int USERMENUADD = 2;
+	private static final int USERMENUVIEW = 1;
+	private static final int USERMENUQUIT = 4;
+	private static final int MAINMENU_USER = 1;
+	private static final int MAINMENUQUIT = 7;
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ArrayList<User> userList = new ArrayList<User>();
@@ -17,23 +23,23 @@ public class C206_CaseStudy {
         
 		int option = 0;
 
-		while (option != 7) { //Modify the quit number whenever you want
+		while (option != MAINMENUQUIT) { 
 			menu();
 			option = Helper.readInt("Enter an option > ");
 
-            if (option == 1) {
+            if (option == MAINMENU_USER) {
                 int userOption = 0;
-                while (userOption != 4) {
+                while (userOption != USERMENUQUIT) {
                 	userMenu();
                     userOption = Helper.readInt("Enter an option > ");
-                    if (userOption == 1) {
+                    if (userOption == USERMENUVIEW) {
                        String output = viewAllUsers(userList);
                         System.out.println(output);
                     }
-                    else if(userOption ==2) {
+                    else if(userOption ==USERMENUADD) {
                     	newUserInput(userList);
                     }
-                    else if(userOption == 3) {
+                    else if(userOption == USERMENUDELETE) {
                		 String userType = Helper.readString("Enter usertype (Teacher/Admin) > ");
                		 int id = Helper.readInt("Enter id of user > ");
                		 deleteUser(userList,id,userType);
@@ -248,7 +254,7 @@ else if(option == 6) {
 			    			} else {
 			    				validID = true;
 			    			}
-			    		}
+  			    		}
 	    		}
 	    		email = Helper.readString("Enter email > ");
 	    		password = Helper.readString("Enter Password > ");
@@ -634,7 +640,9 @@ else if(option == 6) {
 	    	boolean foundFee = false;
 			 while(foundFee == false) {
 				 for(Fees f : feeList) {
-					 if(f.getFeeId() == deleteId) {
+					 int checkedFeeId = f.getFeeId();
+					int feeId = checkedFeeId;
+					if(feeId == deleteId) {
 						 feeList.remove(f);
 						 foundFee = true;
 						 System.out.println("Fee successfully deleted!");
