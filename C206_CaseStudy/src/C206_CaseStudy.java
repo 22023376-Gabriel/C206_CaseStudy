@@ -224,7 +224,7 @@ else if(option == 6) {
 		System.out.println(output);
 		return output;
 	}
-	public static User newUserInput(ArrayList<User> userList) {
+	public static User newUserInput(ArrayList<User> userList) {//Gabriel
     	String userType = Helper.readString("What type of user are you adding? (Admin/Teacher)");
     	boolean validOption = false;
     	String name;
@@ -285,11 +285,11 @@ else if(option == 6) {
 		
 	}
 	
-	 public static void addNewUser(ArrayList<User> userList, User newUser) {
+	 public static void addNewUser(ArrayList<User> userList, User newUser) {//Gabriel
 		 userList.add(newUser);
 	    }
 	 
-	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {
+	 public static void deleteUser(ArrayList<User> userList, int id, String userType) {//Gabriel
 		 boolean foundUser = false;
 		 while(foundUser == false) {
 			 for(User u : userList) {
@@ -608,7 +608,7 @@ else if(option == 6) {
 	    		System.out.println("Student successfully removed.");
 	    	}
 	    }
-	    public static Fees feeInput() {
+	    public static Fees feeInput() {//Gabriel
 	    	String feeName = Helper.readString("Enter fee name > ");
 	    	double feeAmount = Helper.readDouble("Enter fee amount > $");
 	    	String dueDate = Helper.readString("Enter due date (dd/mm/yyyy) > ");
@@ -617,10 +617,10 @@ else if(option == 6) {
 	    	Fees newFee = new Fees(feeName,feeAmount,dueDate, feeId);
 			return newFee;
 	    }
-	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {
+	    public static void addNewFee(ArrayList<Fees> feeList, Fees newFee) {//Gabriel
 	    	feeList.add(newFee);
 	    }
-	    public static String viewAllFees(ArrayList<Fees> feeList) {
+	    public static String viewAllFees(ArrayList<Fees> feeList) {//Gabriel
 			System.out.println(String.format("%-15s %-20s %-40s %-5s" ,"Name", "Fee amount", "Due Date","Fee id"));
 			String output = "";
 			for (int i = 0; i< feeList.size(); i++) {

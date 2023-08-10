@@ -13,11 +13,11 @@ public class C206_CaseStudyTest {
     private ArrayList<Attendance> attendanceList;
     private ArrayList<Enrolment> enrolmentList;
 
-    ArrayList<User> userList = new ArrayList<User>();
+    ArrayList<User> userList = new ArrayList<User>(); //Gabriel
     private ArrayList<Course> courseList;
     ArrayList<Fees> feeList;
     
-	private Admin user1;
+	private Admin user1;//Gabriel
 	private Admin user2;
 	private Teacher user3;
 	private Teacher user4;
@@ -33,19 +33,19 @@ public class C206_CaseStudyTest {
 		//Prepare test data
 		s1 = new Student(1, "Jack Park");
 		s2 = new Student(2, "Tom Roger", 500.00, "25/09/23");
-		user1 = new Admin("Admin1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567");
+		user1 = new Admin("Admin1", 1, "adminP@ss", "Admin", "TuitionManagement@gmail.com", "9123 4567");//Gabriel
 		user2 = new Admin("Admin2", 2, "adminP@ssw3rd", "Admin", "TuitionManagement2@gmail.com", "9123 4537", "9523 4127");
 		user3 = new Teacher("Joseph Neo", 1, "p@ssT3st", "Teacher", "JNeo@yahoo.com", "8990 5902");
 		user4 = new Teacher("Rahman Syed", 2, "p@ssT3st1ng", "Teacher", "RahmanSyed@gmail.com", "8331 5820", "9321 3888"); 
 		c1 = new Course(1, "C209", 23.70);
 		c2 = new Course(2, "C235", 25.90);
-		f1 = new Fees("Tuition", 50.10, "06/11/2023", 1);
+		f1 = new Fees("Tuition", 50.10, "06/11/2023", 1);//Gabriel
 		f2 = new Fees("Admin", 5.50, "06/11/2023", 2);
 		
-		userList = new ArrayList<User>();//For User testing
+		userList = new ArrayList<User>();//For User testing - Gabriel
 		studentList = new ArrayList<Student>();
 		courseList = new ArrayList<Course>();
-		feeList = new ArrayList<Fees>();
+		feeList = new ArrayList<Fees>();//Gabriel
 		attendanceList = new ArrayList<Attendance>();
 	}
 
@@ -59,7 +59,7 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ",true);
 	}
 @Test
-public void testViewAllUsers() {
+public void testViewAllUsers() {//Gabriel
     // Test if Item list is not null but empty - boundary
     assertNotNull("Test if there is a valid user arraylist to retrieve items from", userList);
 
@@ -87,7 +87,7 @@ public void testViewAllUsers() {
 }
 
 @Test 
-public void testAddUser() {
+public void testAddUser() {//Gabriel
 	//Test that the list is not null so users can be added to it
     assertNotNull("Test if there is a valid user arraylist to add items to", userList);
     
@@ -104,7 +104,7 @@ public void testAddUser() {
     assertNotEquals("Test that the userlist size does not increase",2,userList.size());
 }
 @Test
-public void testDeleteUser() {
+public void testDeleteUser() {//Gabriel
     userList.add(user1);
     userList.add(user2);
     userList.add(user3);
@@ -308,7 +308,7 @@ public void testDeleteCourse() {
 	assertEquals("Test that there is 1 in course arraylist", 1, courseList.size());
 }
 @Test
-public void testViewAllFees() {
+public void testViewAllFees() {//Gabriel
     // Test if Item list is not null but empty - boundary
     assertNotNull("Test if there is a valid user arraylist to retrieve items from", feeList);
 
@@ -331,7 +331,7 @@ public void testViewAllFees() {
     assertEquals("Test that ViewAllFees list works", testOutput, allFees);
 }
 @Test 
-public void testAddFees() {
+public void testAddFees() {//Gabriel
 	//Test that the list is not null so users can be added to it
     assertNotNull("Test if there is a valid fees arraylist to add items to", feeList);
     
@@ -348,7 +348,7 @@ public void testAddFees() {
     assertNotEquals("Test that the feelist size does not increase",2,feeList.size());
 }	
 @Test
-public void testDeleteFees() {
+public void testDeleteFees() {//Gabriel
     feeList.add(f1);
     feeList.add(f2);
 	//Test that the list updates when a user is deleted

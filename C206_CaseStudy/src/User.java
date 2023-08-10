@@ -1,5 +1,5 @@
 
-public class User {
+public class User { //Gabriel
 	private String name;
 	private String password;
 	private String userRole;
