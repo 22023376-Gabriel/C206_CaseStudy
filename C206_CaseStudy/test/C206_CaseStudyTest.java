@@ -164,7 +164,6 @@ public void testRemoveStudent() {
 	
 	
 }
-//hi
 @Test
 public void testViewAllCourses() {
     assertNotNull("Test if there is a valid course arraylist to retrieve items from", courseList);
