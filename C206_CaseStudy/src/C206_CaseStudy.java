@@ -10,10 +10,11 @@ public class C206_CaseStudy {
 	private static final int MAINMENUQUIT = 7;
 	private static final int MAINMENU_COURSE = 3;
 	private static final int COURSEMENUVIEW = 1;
-	private static final int COURSEMENUADD = 2;
-	private static final int COURSEMENUEDIT = 3;
-	private static final int COURSEMENUDELETE = 4;
-	private static final int COURSEMENUQUIT = 5;
+	private static final int COURSEMENUSEARCH = 2;
+	private static final int COURSEMENUADD = 3;
+	private static final int COURSEMENUEDIT = 4;
+	private static final int COURSEMENUDELETE = 5;
+	private static final int COURSEMENUQUIT = 6;
 
 	
 	public static void main(String[] args) {
@@ -77,6 +78,9 @@ public class C206_CaseStudy {
 					
 					if (courseOption == COURSEMENUVIEW) {
 						viewAllCourses(courseList);
+					}
+					else if (courseOption == COURSEMENUSEARCH) {
+						searchCourse(courseList);
 					}
 					else if (courseOption == COURSEMENUADD) {
 						addNewCourse(courseList);
@@ -169,10 +173,11 @@ else if(option == 6) {
 		System.out.println("COURSE MANAGEMENT");
 		Helper.line(80, "-");
 		System.out.println("1. Display All Course");
-		System.out.println("2. Add New Course");
-		System.out.println("3. Edit Course");
-		System.out.println("4. Remove Course");
-		System.out.println("5. Quit");
+		System.out.println("2. Search Course");
+		System.out.println("3. Add New Course");
+		System.out.println("4. Edit Course");
+		System.out.println("5. Remove Course");
+		System.out.println("6. Quit");
 		Helper.line(80, "-");
 		
 	}
@@ -393,6 +398,28 @@ else if(option == 6) {
 		return output;
 	}
 	
+	//Search course
+	//Joanna
+	public static String searchCourse(ArrayList<Course> courseList) {
+		String courseSearch = Helper.readString("Enter Course Name > ");
+		String output = "";
+		boolean searchFound = true;
+		
+		for (int i = 0; i < courseList.size(); i++) {
+			if (courseList.get(i).getCourseName().equalsIgnoreCase(courseSearch)) {
+				output += String.format("%-5s %-10s %-10s", "ID", "Name", "Course Fee");
+				output += String.format("\n%-5d %-10s $%-10.2f", courseList.get(i).getCourseID(), courseList.get(i).getCourseName(), courseList.get(i).getCourseFee());
+				searchFound = false;
+			}
+		}
+		if (searchFound) {
+			System.out.println("Course does not exist");
+		} else {
+			System.out.println(output);
+		}
+		return output;
+	}
+	
 	//Add new course
 	//Joanna
 	public static void addNewCourse(ArrayList<Course> courseList) {
@@ -421,7 +448,7 @@ else if(option == 6) {
     			//course fees & add
     			double courseFee = Helper.readDouble("Enter Course Fees > ");
     			
-                Course course = new Course(courseID, courseName, courseFee);
+                Course course = new Course(courseID, courseName.toUpperCase(), courseFee);
                 courseList.add(course);
                 System.out.println("Course added successfully.");
                 
@@ -479,8 +506,8 @@ else if(option == 6) {
 		            }
 		    		
 		    		if (courseAvaliableName == true) {
-						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
-						courseList.get(i).setCourseName(newName);
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName.toUpperCase() + ".");
+						courseList.get(i).setCourseName(newName.toUpperCase());
 						
 		    		} else {
 		    			System.out.println("Error: Course Name is not available.");
@@ -515,10 +542,10 @@ else if(option == 6) {
 		    		
 		    		if (courseAvaliableName == true) {
 						double newFee = Helper.readDouble("Enter New Fee Amount > ");
-						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName + ".");
+						System.out.println(courseList.get(i).getCourseName() + " has been updated to " + newName.toUpperCase() + ".");
 						System.out.println(courseList.get(i).getCourseName() + " fees has been updated from $" + courseList.get(i).getCourseFee() + " to $" + newFee);
 				
-						courseList.get(i).setCourseName(newName);
+						courseList.get(i).setCourseName(newName.toUpperCase());
 						courseList.get(i).setCourseFee(newFee);
 						
 		    		} else {

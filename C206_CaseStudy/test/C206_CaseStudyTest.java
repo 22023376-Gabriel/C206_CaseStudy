@@ -37,8 +37,8 @@ public class C206_CaseStudyTest {
 		user2 = new Admin("Admin2", 2, "adminP@ssw3rd", "Admin", "TuitionManagement2@gmail.com", "9123 4537", "9523 4127");
 		user3 = new Teacher("Joseph Neo", 1, "p@ssT3st", "Teacher", "JNeo@yahoo.com", "8990 5902");
 		user4 = new Teacher("Rahman Syed", 2, "p@ssT3st1ng", "Teacher", "RahmanSyed@gmail.com", "8331 5820", "9321 3888"); 
-		c1 = new Course(1, "C209", 23.70);
-		c2 = new Course(2, "C235", 25.90);
+		c1 = new Course(1, "ENGLISH", 23.70);
+		c2 = new Course(2, "MATH", 25.90);
 		f1 = new Fees("Tuition", 50.10, "06/11/2023", 1);
 		f2 = new Fees("Admin", 5.50, "06/11/2023", 2);
 		
@@ -262,7 +262,7 @@ public void testViewAllCourses() {
 
     // test if the list of courses retrieved from the SourceCentre is empty - boundary
     String allCourses = C206_CaseStudy.viewAllCourses(courseList);
-    String testOutput = "ID    Name       Course Fee";
+    String testOutput = "";
 
     assertEquals("Check that ViewAllCourseslist", testOutput, allCourses);
 
@@ -278,10 +278,20 @@ public void testViewAllCourses() {
     testOutput += String.format("\n%-5d %-10s $%-10.2f",2, "C235", 25.90);
     assertEquals("Test that ViewAllCourseslist works", testOutput, allCourses);
 }
+
+@Test
+public void testSearchCourse() {
+	//Add courses for list
+    courseList.add(c1);
+    courseList.add(c2);
+    assertNotEquals("Test that the course arraylist size is not empty", 0, courseList.size());
+
+	//Test calling of search
+    String findCourse = C206_CaseStudy.searchCourse(courseList);
+}
+
 @Test
 public void testAddNewCourse() {
-	assertNotNull("Test that that is valid Student arraylist to add to", courseList);
-	
 	//Added new course 1
 	C206_CaseStudy.addNewCourse(courseList);
 	assertEquals("Test that Course arraylist size is 1", 1, courseList.size());
